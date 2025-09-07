@@ -1,0 +1,265 @@
+<script>
+    // Progress bar functionality
+    function updateProgressBar() {
+        const form = document.getElementById('candidateForm');
+        const inputs = form.querySelectorAll('input[required], textarea[required], select[required]');
+        const radioGroups = {};
+        
+        // Group radio buttons
+        inputs.forEach(input => {
+            if (input.type === 'radio') {
+                if (!radioGroups[input.name]) {
+                    radioGroups[input.name] = [];
+                }
+                radioGroups[input.name].push(input);
+            }
+        });
+        
+        let totalFields = 0;
+        let completedFields = 0;
+        
+        // Count individual inputs (excluding radio groups)
+        inputs.forEach(input => {
+            if (input.type !== 'radio') {
+                totalFields++;
+                if (input.value.trim() !== '') {
+                    completedFields++;
+                }
+            }
+        });
+        
+        // Count radio groups
+        Object.keys(radioGroups).forEach(groupName => {
+            totalFields++;
+            const isChecked = radioGroups[groupName].some(radio => radio.checked);
+            if (isChecked) {
+                completedFields++;
+            }
+        });
+        
+        const progress = (completedFields / totalFields) * 100;
+        document.getElementById('progressFill').style.width = progress + '%';
+    }
+
+    // Conditional field display
+    function setupConditionalFields() {
+        const certCheckboxes = document.querySelectorAll('input[name="certifications"]');
+        const certDetailsGroup = document.getElementById('certDetailsGroup');
+        const noCertCheckbox = document.getElementById('noCert');
+        
+        const otherDevCheckbox = document.getElementById('otherDev');
+        const otherDevGroup = document.getElementById('otherDevGroup');
+        
+        // Certification details conditional display
+        certCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                if (noCertCheckbox.checked) {
+                    // If "None" is checked, uncheck others and hide details
+                    certCheckboxes.forEach(cb => {
+                        if (cb !== noCertCheckbox) cb.checked = false;
+                    });
+                    certDetailsGroup.style.display = 'none';
+                } else {
+                    // If any certification is checked, show details
+                    const anyChecked = Array.from(certCheckboxes)
+                        .filter(cb => cb !== noCertCheckbox)
+                        .some(cb => cb.checked);
+                    
+                    certDetailsGroup.style.display = anyChecked ? 'block' : 'none';
+                    
+                    // If other certifications are checked, uncheck "None"
+                    if (anyChecked) {
+                        noCertCheckbox.checked = false;
+                    }
+                }
+            });
+        });
+        
+        // Other professional development conditional display
+        otherDevCheckbox.addEventListener('change', () => {
+            otherDevGroup.style.display = otherDevCheckbox.checked ? 'block' : 'none';
+        });
+    }
+
+    // ✅ UPDATED: Google Sheets integration with YOUR DEPLOYMENT ID
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby1tOJi6FnosDza6SuYl5IF1x1rN9Etomc3UnxpTMj9GFu4-MuZgeKkleJy7z_K5KGN/exec';
+    
+    // Form validation and submission
+    function setupFormValidation() {
+        const form = document.getElementById('candidateForm');
+        const submitBtn = document.querySelector('.submit-btn');
+        
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Custom validation for technical skills
+            const skillCategories = ['basicComputer', 'onlinePlatforms', 'lms', 'edTech', 'contentCreation'];
+            let allSkillsRated = true;
+            
+            skillCategories.forEach(category => {
+                const radios = document.querySelectorAll(`input[name="${category}"]`);
+                const isChecked = Array.from(radios).some(radio => radio.checked);
+                if (!isChecked) {
+                    allSkillsRated = false;
+                    // Highlight the missing category
+                    radios[0].closest('.scale-item').style.borderColor = '#e74c3c';
+                } else {
+                    radios[0].closest('.scale-item').style.borderColor = '#e0e0e0';
+                }
+            });
+            
+            if (!allSkillsRated) {
+                alert('Please rate all technical skills categories.');
+                return;
+            }
+            
+            // Validate all required fields
+            const requiredFields = form.querySelectorAll('[required]');
+            let allFieldsValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    allFieldsValid = false;
+                    field.style.borderColor = '#e74c3c';
+                } else {
+                    field.style.borderColor = '#e0e0e0';
+                }
+                
+                // Special validation for radio groups
+                if (field.type === 'radio') {
+                    const groupName = field.name;
+                    const groupChecked = form.querySelectorAll(`input[name="${groupName}"]:checked`).length > 0;
+                    if (!groupChecked) {
+                        allFieldsValid = false;
+                        document.querySelectorAll(`input[name="${groupName}"]`)[0]
+                            .closest('.radio-group').style.borderColor = '#e74c3c';
+                    } else {
+                        document.querySelectorAll(`input[name="${groupName}"]`)[0]
+                            .closest('.radio-group').style.borderColor = '#e0e0e0';
+                    }
+                }
+            });
+            
+            if (!allFieldsValid) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            // Show loading state
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Submitting...';
+            submitBtn.disabled = true;
+            
+            try {
+                // Collect form data
+                const formData = new FormData(form);
+                const data = {};
+                
+                // Handle regular form fields
+                for (let [key, value] of formData.entries()) {
+                    if (data[key]) {
+                        // Handle multiple values (checkboxes)
+                        if (Array.isArray(data[key])) {
+                            data[key].push(value);
+                        } else {
+                            data[key] = [data[key], value];
+                        }
+                    } else {
+                        data[key] = value;
+                    }
+                }
+                
+                // Format data for Google Sheets
+                const sheetData = {
+                    timestamp: new Date().toLocaleString(),
+                    fullName: data.fullName,
+                    nationality: data.nationality,
+                    idNumber: data.idNumber,
+                    gender: data.gender,
+                    dob: data.dob,
+                    currentJob: data.currentJob,
+                    phone: data.phone,
+                    email: data.email,
+                    major: data.major,
+                    degrees: data.degrees,
+                    certifications: Array.isArray(data.certifications) ? data.certifications.join(', ') : data.certifications || 'None',
+                    certDetails: data.certDetails || '',
+                    teachingExp: data.teachingExp,
+                    postDegreeExp: data.postDegreeExp,
+                    computerExp: data.computerExp,
+                    basicComputer: data.basicComputer,
+                    onlinePlatforms: data.onlinePlatforms,
+                    lms: data.lms,
+                    edTech: data.edTech,
+                    contentCreation: data.contentCreation,
+                    teachingPhilosophy: data.teachingPhilosophy,
+                    multiculturalExp: data.multiculturalExp,
+                    adaptability: data.adaptability,
+                    profDevelopment: Array.isArray(data.profDevelopment) ? data.profDevelopment.join(', ') : data.profDevelopment || 'None',
+                    otherDevText: data.otherDevText || '',
+                    cvLink: data.cvLink || '',
+                    additionalQual: data.additionalQual || '',
+                    availability: data.availability
+                };
+                
+                // ✅ UPDATED: Send to YOUR Google Sheets
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(sheetData)
+                });
+                
+                // Check if the response is OK (status 200-299)
+                if (response.ok) {
+                    // Try to parse the JSON response
+                    try {
+                        const result = await response.json();
+                        if (result.result === 'success') {
+                            alert('✅ Form submitted successfully! Your application has been recorded in the "Candidate Questionnaire" Google Sheet.');
+                            form.reset();
+                            updateProgressBar();
+                        } else {
+                            throw new Error(result.error || 'Unknown error from Google Script');
+                        }
+                    } catch (jsonError) {
+                        // If JSON parsing fails, but response is OK, assume success
+                        alert('✅ Form submitted successfully! Your application has been recorded in the "Candidate Questionnaire" Google Sheet.');
+                        form.reset();
+                        updateProgressBar();
+                    }
+                } else {
+                    // Handle HTTP error status (4xx, 5xx)
+                    throw new Error(`Server returned ${response.status}: ${response.statusText}`);
+                }
+                
+            } catch (error) {
+                console.error('Submission error:', error);
+                alert('❌ There was an error submitting your form: ' + error.message + '. Please try again or contact support.');
+            } finally {
+                // Reset button state
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+    }
+
+    // Initialize all functionality
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log('Form initialization started...');
+        
+        setupConditionalFields();
+        setupFormValidation();
+        
+        // Update progress bar on any input change
+        const form = document.getElementById('candidateForm');
+        form.addEventListener('input', updateProgressBar);
+        form.addEventListener('change', updateProgressBar);
+        
+        // Initial progress bar update
+        updateProgressBar();
+        
+        console.log('Form initialization completed');
+    });
+</script>
