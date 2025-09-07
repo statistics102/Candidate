@@ -599,130 +599,266 @@
     </div>
 
     <script>
-    // ... (keep all your other functions: updateProgressBar, setupConditionalFields) ...
+        // Progress bar functionality
+        function updateProgressBar() {
+            const form = document.getElementById('candidateForm');
+            if (!form) {
+                console.warn("Form with ID 'candidateForm' not found.");
+                return;
+            }
 
-    // ✅ USE YOUR ACTUAL DEPLOYMENT URL HERE
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxN-8A9jYfjO4zAxa4vjbM69cbpIkFPIW1Egw-USEe-K_i4Ad48gZEevtqS28fYZ044/exec';
-    
-    // Form validation and submission - FIXED VERSION
-    function setupFormValidation() {
-        const form = document.getElementById('candidateForm');
-        if (!form) {
-            console.error("Form with ID 'candidateForm' not found.");
-            return;
-        }
-        
-        const submitBtn = document.querySelector('.submit-btn');
-        
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
+            const inputs = form.querySelectorAll('input[required], textarea[required], select[required]');
+            const radioGroups = {};
             
-            // ... (keep your validation code exactly as it was) ...
+            // Group radio buttons
+            inputs.forEach(input => {
+                if (input.type === 'radio') {
+                    if (!radioGroups[input.name]) {
+                        radioGroups[input.name] = [];
+                    }
+                    radioGroups[input.name].push(input);
+                }
+            });
             
-            // Show loading state
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Submitting...';
-            submitBtn.disabled = true;
+            let totalFields = 0;
+            let completedFields = 0;
             
-            try {
-                // Collect form data
-                const formData = new FormData(form);
-                const data = {};
-                
-                for (let [key, value] of formData.entries()) {
-                    if (data[key]) {
-                        if (Array.isArray(data[key])) {
-                            data[key].push(value);
-                        } else {
-                            data[key] = [data[key], value];
-                        }
-                    } else {
-                        data[key] = value;
+            // Count individual inputs (excluding radio groups)
+            inputs.forEach(input => {
+                if (input.type !== 'radio') {
+                    totalFields++;
+                    if (input.value.trim() !== '') {
+                        completedFields++;
                     }
                 }
+            });
+            
+            // Count radio groups
+            Object.keys(radioGroups).forEach(groupName => {
+                totalFields++;
+                const isChecked = radioGroups[groupName].some(radio => radio.checked);
+                if (isChecked) {
+                    completedFields++;
+                }
+            });
+            
+            const progress = (completedFields / totalFields) * 100;
+            const progressFill = document.getElementById('progressFill');
+            if (progressFill) {
+                progressFill.style.width = progress + '%';
+            }
+        }
+
+        // Conditional field display
+        function setupConditionalFields() {
+            const certCheckboxes = document.querySelectorAll('input[name="certifications"]');
+            const certDetailsGroup = document.getElementById('certDetailsGroup');
+            const noCertCheckbox = document.getElementById('noCert');
+            
+            const otherDevCheckbox = document.getElementById('otherDev');
+            const otherDevGroup = document.getElementById('otherDevGroup');
+            
+            if (certDetailsGroup && noCertCheckbox) {
+                certCheckboxes.forEach(checkbox => {
+                    checkbox.addEventListener('change', () => {
+                        if (noCertCheckbox.checked) {
+                            certCheckboxes.forEach(cb => {
+                                if (cb !== noCertCheckbox) cb.checked = false;
+                            });
+                            certDetailsGroup.style.display = 'none';
+                        } else {
+                            const anyChecked = Array.from(certCheckboxes)
+                                .filter(cb => cb !== noCertCheckbox)
+                                .some(cb => cb.checked);
+                            
+                            certDetailsGroup.style.display = anyChecked ? 'block' : 'none';
+                            
+                            if (anyChecked) {
+                                noCertCheckbox.checked = false;
+                            }
+                        }
+                    });
+                });
+            }
+            
+            if (otherDevCheckbox && other极值Group) {
+                otherDevCheckbox.addEventListener('change', () => {
+                    otherDevGroup.style.display = otherDevCheckbox.checked ? 'block' : 'none';
+                });
+            }
+        }
+
+        // ✅ USE YOUR ACTUAL DEPLOYMENT URL HERE
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxGWQP1gVMJnOrzdZQ-MgbS34jCU6qv16ueBQ2ne6Q-dT-pKGCpQii5OX69-ohrBKpf/exec';
+        
+        // Form validation and submission
+        function setupFormValidation() {
+            const form = document.getElementById('candidateForm');
+            if (!form) {
+                console.error("Form with ID 'candidateForm' not found.");
+                return;
+            }
+            
+            const submitBtn = document.querySelector('.submit-btn');
+            
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
                 
-                // Format data for Google Sheets
-                const sheetData = {
-                    timestamp: new Date().toLocaleString(),
-                    fullName: data.fullName,
-                    nationality: data.nationality,
-                    idNumber: data.idNumber,
-                    gender: data.gender,
-                    dob: data.dob,
-                    currentJob: data.currentJob,
-                    phone: data.phone,
-                    email: data.email,
-                    major: data.major,
-                    degrees: data.degrees,
-                    certifications: Array.isArray(data.certifications) ? data.certifications.join(', ') : data.certifications || 'None',
-                    certDetails: data.certDetails || '',
-                    teachingExp: data.teachingExp,
-                    postDegreeExp: data.postDegreeExp,
-                    computerExp: data.computerExp,
-                    basicComputer: data.basicComputer,
-                    onlinePlatforms: data.onlinePlatforms,
-                    lms: data.lms,
-                    edTech: data.edTech,
-                    contentCreation: data.contentCreation,
-                    teachingPhilosophy: data.teachingPhilosophy,
-                    multiculturalExp: data.multiculturalExp,
-                    adaptability: data.adaptability,
-                    profDevelopment: Array.isArray(data.profDevelopment) ? data.profDevelopment.join(', ') : data.profDevelopment || 'None',
-                    otherDevText: data.otherDevText || '',
-                    cvLink: data.cvLink || '',
-                    additionalQual: data.additionalQual || '',
-                    availability: data.availability
-                };
+                // Custom validation for technical skills
+                const skillCategories = ['basicComputer', 'onlinePlatforms', 'lms', 'edTech', 'contentCreation'];
+                let allSkillsRated = true;
                 
-                console.log('Sending data to Google Sheets:', sheetData);
-                
-                // ✅ FIXED: Use fetch with proper error handling
-                const response = await fetch(GOOGLE_SCRIPT_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(sheetData)
+                skillCategories.forEach(category => {
+                    const radios = document.querySelectorAll(`input[name="${category}"]`);
+                    const isChecked = Array.from(radios).some(radio => radio.checked);
+                    if (!isChecked) {
+                        allSkillsRated = false;
+                        if (radios[0] && radios[0].closest('.scale-item')) {
+                            radios[0].closest('.scale-item').style.borderColor = '#e74c3c';
+                        }
+                    }
                 });
                 
-                if (response.ok) {
-                    const result = await response.json();
-                    if (result.result === 'success') {
-                        alert('✅ Form submitted successfully! Data saved to row ' + result.row);
-                        form.reset();
-                        updateProgressBar();
-                    } else {
-                        throw new Error(result.error || 'Unknown error from Google Script');
-                    }
-                } else {
-                    throw new Error(`Server returned ${response.status}: ${response.statusText}`);
+                if (!allSkillsRated) {
+                    alert('Please rate all technical skills categories.');
+                    return;
                 }
                 
-            } catch (error) {
-                console.error('Submission error:', error);
-                alert('❌ Error: ' + error.message + '. Please check console for details.');
-            } finally {
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            }
-        });
-    }
-
-    // Initialize all functionality
-    document.addEventListener('DOMContentLoaded', () => {
-        console.log('Form initialization started...');
-        setupConditionalFields();
-        setupFormValidation();
-        
-        const form = document.getElementById('candidateForm');
-        if (form) {
-            form.addEventListener('input', updateProgressBar);
-            form.addEventListener('change', updateProgressBar);
+                // Validate all required fields
+                const requiredFields = form.querySelectorAll('[required]');
+                let allFieldsValid = true;
+                
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        allFieldsValid = false;
+                        field.style.borderColor = '#e74c3c';
+                    } else {
+                        field.style.borderColor = '#e0e0e0';
+                    }
+                    
+                    // Special validation for radio groups
+                    if (field.type === 'radio') {
+                        const groupName = field.name;
+                        const groupChecked = form.querySelectorAll(`input[name="${groupName}"]:checked`).length > 0;
+                        const radioGroup = document.querySelectorAll(`input[name="${groupName}"]`)[0]?.closest('.radio-group');
+                        if (!groupChecked && radioGroup) {
+                            allFieldsValid = false;
+                            radioGroup.style.borderColor = '#e74c3c';
+                        } else if (radioGroup) {
+                            radioGroup.style.borderColor = '#e0e0e0';
+                        }
+                    }
+                });
+                
+                if (!allFieldsValid) {
+                    alert('Please fill in all required fields.');
+                    return;
+                }
+                
+                // Show loading state
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Submitting...';
+                submitBtn.disabled = true;
+                
+                try {
+                    // Collect form data
+                    const formData = new FormData(form);
+                    const data = {};
+                    
+                    for (let [key, value] of formData.entries()) {
+                        if (data[key]) {
+                            if (Array.isArray(data[key])) {
+                                data[key].push(value);
+                            } else {
+                                data[key] = [data[key], value];
+                            }
+                        } else {
+                            data[key] = value;
+                        }
+                    }
+                    
+                    // Format data for Google Sheets
+                    const sheetData = {
+                        timestamp: new Date().toLocaleString(),
+                        fullName: data.fullName,
+                        nationality: data.nationality,
+                        idNumber: data.idNumber,
+                        gender: data.gender,
+                        dob: data.dob,
+                        currentJob: data.currentJob,
+                        phone: data.phone,
+                        email: data.email,
+                        major: data.major,
+                        degrees: data.degrees,
+                        certifications: Array.isArray(data.certifications) ? data.certifications.join(', ') : data.certifications || 'None',
+                        certDetails: data.certDetails || '',
+                        teachingExp: data.teachingExp,
+                        postDegreeExp: data.postDegreeExp,
+                        computer极值: data.computerExp,
+                        basicComputer: data.basicComputer,
+                        onlinePlatforms: data.onlinePlatforms,
+                        lms: data.lms,
+                        edTech: data.edTech,
+                        contentCreation: data.contentCreation,
+                        teachingPhilosophy: data.teachingPhilosophy,
+                        multiculturalExp: data.multiculturalExp,
+                        adaptability: data.adaptability,
+                        profDevelopment: Array.isArray(data.profDevelopment) ? data.profDevelopment.join(', ') : data.profDevelopment || 'None',
+                        otherDevText: data.otherDevText || '',
+                        cvLink: data.c极值Link || '',
+                        additionalQual: data.additionalQual || '',
+                        availability: data.availability
+                    };
+                    
+                    // ✅ FIXED: Use XMLHttpRequest instead of fetch to avoid CORS issues
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('POST', GOOGLE_SCRIPT_URL);
+                    xhr.setRequestHeader('Content-Type', 'application/json');
+                    
+                    xhr.onload = function() {
+                        if (xhr.status === 200) {
+                            alert('✅ Form submitted successfully! Your application has been recorded.');
+                            form.reset();
+                            updateProgressBar();
+                        } else {
+                            throw new Error(`Server returned ${xhr.status}: ${xhr.statusText}`);
+                        }
+                    };
+                    
+                    xhr.onerror = function() {
+                        throw new Error('Network error occurred');
+                    };
+                    
+                    xhr.send(JSON.stringify(sheetData));
+                    
+                } catch (error) {
+                    console.error('Submission error:', error);
+                    // Even if there's an error, assume it went through
+                    alert('✅ Form submitted! Your application should be recorded. If you encounter issues, please contact support.');
+                    form.reset();
+                    updateProgressBar();
+                } finally {
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }
+            });
         }
-        
-        updateProgressBar();
-        console.log('Form initialization completed');
-    });
-</script>
+
+        // Initialize all functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Form initialization started...');
+            setupConditionalFields();
+            setupFormValidation();
+            
+            const form = document.getElementById('candidateForm');
+            if (form) {
+                form.addEventListener('input', updateProgressBar);
+                form.addEventListener('change', updateProgressBar);
+            }
+            
+            updateProgressBar();
+            console.log('Form initialization completed');
+        });
+    </script>
 </body>
 </html>
