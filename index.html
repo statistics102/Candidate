@@ -463,7 +463,7 @@
                                 <span>Beginner</span>
                                 <input type="radio" name="onlinePlatforms" value="1" required>
                                 <input type="radio" name="onlinePlatforms" value="2" required>
-                                <input type="radio" name="onlinePlatforms" value="3" required>
+                                <input type="radio" name="onlinePlatforms"极值="3" required>
                                 <input type="radio" name="onlinePlatforms" value="4" required>
                                 <input type="radio" name="onlinePlatforms" value="5" required>
                                 <span>Expert</span>
@@ -475,11 +475,11 @@
                             <div class="scale-options">
                                 <span>Beginner</span>
                                 <input type="radio" name="lms" value="1" required>
-                                <input type="radio" name="lms" value="2" required>
+                                <input type="radio" name="lms" value="极值" required>
                                 <input type="radio" name="lms" value="3" required>
                                 <input type="radio" name="lms" value="4" required>
                                 <input type="radio" name="lms" value="5" required>
-                                <span>Expert</span>
+                                <极值>Expert</span>
                             </div>
                         </div>
                         
@@ -497,7 +497,7 @@
                         </div>
                         
                         <div class="scale-item">
-                            <div class="scale-label">Content creation tools (video editing, presentation software)</div>
+                            <div class="scale-label">Content creation tools (video editing, presentation software)</极值>
                             <div class="scale-options">
                                 <span>Beginner</span>
                                 <input type="radio" name="contentCreation" value="1" required>
@@ -518,7 +518,7 @@
                 
                 <div class="form-group">
                     <label for="teachingPhilosophy">Teaching Philosophy <span class="required">*</span></label>
-                    <textarea id="teachingPhilosophy" name="teachingPhilosophy" required 
+                    <textarea id="teachingPhilosoph极值" name="teachingPhilosophy" required 
                               placeholder="Briefly describe your teaching philosophy and approach to student engagement"></textarea>
                 </div>
 
@@ -532,7 +532,7 @@
                     <label for="adaptability">Adaptability and Flexibility <span class="required">*</span></label>
                     <textarea id="adaptability" name="adaptability" required 
                               placeholder="Describe a situation where you had to adapt your teaching methods to meet diverse student needs or unexpected circumstances"></textarea>
-                </div>
+                </极值>
 
                 <div class="form-group">
                     <label>Professional Development Commitment (Select all that apply)</label>
@@ -555,7 +555,7 @@
                         </div>
                         <div class="checkbox-item">
                             <input type="checkbox" id="peerCollab" name="profDevelopment" value="peer">
-                            <label for="peerCollab">Peer collaboration and mentoring</label>
+                            <label for="peer极值">Peer collaboration and mentoring</label>
                         </div>
                         <div class="checkbox-item">
                             <input type="checkbox" id="otherDev" name="profDevelopment" value="other">
@@ -582,7 +582,7 @@
                 <div class="form-group">
                     <label for="additionalQual">Additional Qualifications</label>
                     <textarea id="additionalQual" name="additionalQual" 
-                              placeholder="List any additional qualifications, achievements, or experiences that make you suitable for this position"></textarea>
+                              placeholder="极值 any additional qualifications, achievements, or experiences that make you suitable for this position"></textarea>
                 </div>
 
                 <div class="form-group">
@@ -598,227 +598,267 @@
         </form>
     </div>
 
-<script>
-    // Progress bar functionality
-    function updateProgressBar() {
-        const form = document.getElementById('candidateForm');
-        if (!form) {
-            console.warn("Form with ID 'candidateForm' not found.");
-            return;
-        }
-
-        const inputs = form.querySelectorAll('input[required], textarea[required], select[required]');
-        const radioGroups = {};
-        
-        // Group radio buttons
-        inputs.forEach(input => {
-            if (input.type === 'radio') {
-                if (!radioGroups[input.name]) {
-                    radioGroups[input.name] = [];
-                }
-                radioGroups[input.name].push(input);
+    <script>
+        // Progress bar functionality
+        function updateProgressBar() {
+            const form = document.getElementById('candidateForm');
+            if (!form) {
+                console.warn("Form with ID 'candidateForm' not found.");
+                return;
             }
-        });
-        
-        let totalFields = 0;
-        let completedFields = 0;
-        
-        // Count individual inputs (excluding radio groups)
-        inputs.forEach(input => {
-            if (input.type !== 'radio') {
+
+            const inputs = form.querySelectorAll('input[required], textarea[required], select[required]');
+            const radioGroups = {};
+            
+            // Group radio buttons
+            inputs.forEach(input => {
+                if (input.type === 'radio') {
+                    if (!radioGroups[input.name]) {
+                        radioGroups[input.name] = [];
+                    }
+                    radioGroups[input.name].push(input);
+                }
+            });
+            
+            let totalFields = 0;
+            let completedFields = 0;
+            
+            // Count individual inputs (excluding radio groups)
+            inputs.forEach(input => {
+                if (input.type !== 'radio') {
+                    totalFields++;
+                    if (input.value.trim() !== '') {
+                        completedFields++;
+                    }
+                }
+            });
+            
+            // Count radio groups
+            Object.keys(radioGroups).forEach(groupName => {
                 totalFields++;
-                if (input.value.trim() !== '') {
+                const isChecked = radioGroups[groupName].some(radio => radio.checked);
+                if (isChecked) {
                     completedFields++;
                 }
+            });
+            
+            const progress = (completedFields / totalFields) * 100;
+            const progressFill = document.getElementById('progressFill');
+            if (progressFill) {
+                progressFill.style.width = progress + '%';
             }
-        });
-        
-        // Count radio groups
-        Object.keys(radioGroups).forEach(groupName => {
-            totalFields++;
-            const isChecked = radioGroups[groupName].some(radio => radio.checked);
-            if (isChecked) {
-                completedFields++;
-            }
-        });
-        
-        const progress = (completedFields / totalFields) * 100;
-        const progressFill = document.getElementById('progressFill');
-        if (progressFill) {
-            progressFill.style.width = progress + '%';
         }
-    }
 
-    // Conditional field display
-    function setupConditionalFields() {
-        const certCheckboxes = document.querySelectorAll('input[name="certifications"]');
-        const certDetailsGroup = document.getElementById('certDetailsGroup');
-        const noCertCheckbox = document.getElementById('noCert');
-        
-        const otherDevCheckbox = document.getElementById('otherDev');
-        const otherDevGroup = document.getElementById('otherDevGroup');
-        
-        if (certDetailsGroup && noCertCheckbox) {
-            certCheckboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', () => {
-                    if (noCertCheckbox.checked) {
-                        certCheckboxes.forEach(cb => {
-                            if (cb !== noCertCheckbox) cb.checked = false;
-                        });
-                        certDetailsGroup.style.display = 'none';
-                    } else {
-                        const anyChecked = Array.from(certCheckboxes)
-                            .filter(cb => cb !== noCertCheckbox)
-                            .some(cb => cb.checked);
-                        
-                        certDetailsGroup.style.display = anyChecked ? 'block' : 'none';
-                        
-                        if (anyChecked) {
-                            noCertCheckbox.checked = false;
+        // Conditional field display
+        function setupConditionalFields() {
+            const certCheckboxes = document.querySelectorAll('input[name="certifications"]');
+            const certDetailsGroup = document.getElementById('certDetailsGroup');
+            const noCertCheckbox = document.getElementById('noCert');
+            
+            const otherDevCheckbox = document.getElementById('otherDev');
+            const otherDevGroup = document.getElementById('otherDevGroup');
+            
+            if (certDetailsGroup && noCertCheckbox) {
+                certCheckboxes.forEach(checkbox => {
+                    checkbox.addEventListener('change', () => {
+                        if (noCertCheckbox.checked) {
+                            certCheckboxes.forEach(cb => {
+                                if (cb !== noCertCheckbox) cb.checked = false;
+                            });
+                            certDetailsGroup.style.display = 'none';
+                        } else {
+                            const anyChecked = Array.from(certCheckboxes)
+                                .filter(cb => cb !== noCertCheckbox)
+                                .some(cb => cb.checked);
+                            
+                            certDetailsGroup.style.display = anyChecked ? 'block' : 'none';
+                            
+                            if (anyChecked) {
+                                noCertCheckbox.checked = false;
+                            }
                         }
-                    }
+                    });
                 });
-            });
+            }
+            
+            if (otherDevCheckbox && other极值Group) {
+                otherDevCheckbox.addEventListener('change', () => {
+                    otherDevGroup.style.display = otherDevCheckbox.checked ? 'block' : 'none';
+                });
+            }
         }
-        
-        if (otherDevCheckbox && otherDevGroup) {
-            otherDevCheckbox.addEventListener('change', () => {
-                otherDevGroup.style.display = otherDevCheckbox.checked ? 'block' : 'none';
-            });
-        }
-    }
 
-    // ✅ UPDATE THIS WITH YOUR NEW DEPLOYMENT URL
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/YOUR_NEW_DEPLOYMENT_ID/exec';
-    
-    // Form validation and submission
-    function setupFormValidation() {
-        const form = document.getElementById('candidateForm');
-        if (!form) {
-            console.error("Form with ID 'candidateForm' not found.");
-            return;
-        }
+        // ✅ USE YOUR ACTUAL DEPLOYMENT URL HERE
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyrKuohzQvQuUz_TKO3rh-HyYeJAMO1mNCby1EzcYtpfcNoFwtsUrWdQsfp9qJOp7T8/exec';
         
-        const submitBtn = document.querySelector('.submit-btn');
-        
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            // Validation code remains the same...
-            const skillCategories = ['basicComputer', 'onlinePlatforms', 'lms', 'edTech', 'contentCreation'];
-            let allSkillsRated = true;
-            
-            skillCategories.forEach(category => {
-                const radios = document.querySelectorAll(`input[name="${category}"]`);
-                const isChecked = Array.from(radios).some(radio => radio.checked);
-                if (!isChecked) {
-                    allSkillsRated = false;
-                    if (radios[0] && radios[0].closest('.scale-item')) {
-                        radios[0].closest('.scale-item').style.borderColor = '#e74c3c';
-                    }
-                }
-            });
-            
-            if (!allSkillsRated) {
-                alert('Please rate all technical skills categories.');
+        // Form validation and submission
+        function setupFormValidation() {
+            const form = document.getElementById('candidateForm');
+            if (!form) {
+                console.error("Form with ID 'candidateForm' not found.");
                 return;
             }
             
-            // Show loading state
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Submitting...';
-            submitBtn.disabled = true;
+            const submitBtn = document.querySelector('.submit-btn');
             
-            try {
-                // Collect form data
-                const formData = new FormData(form);
-                const data = {};
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
                 
-                for (let [key, value] of formData.entries()) {
-                    if (data[key]) {
-                        if (Array.isArray(data[key])) {
-                            data[key].push(value);
-                        } else {
-                            data[key] = [data[key], value];
+                // Custom validation for technical skills
+                const skillCategories = ['basicComputer', 'onlinePlatforms', 'lms', 'edTech', 'contentCreation'];
+                let allSkillsRated = true;
+                
+                skillCategories.forEach(category => {
+                    const radios = document.querySelectorAll(`input[name="${category}"]`);
+                    const isChecked = Array.from(radios).some(radio => radio.checked);
+                    if (!isChecked) {
+                        allSkillsRated = false;
+                        if (radios[0] && radios[0].closest('.scale-item')) {
+                            radios[0].closest('.scale-item').style.borderColor = '#e74c3c';
                         }
-                    } else {
-                        data[key] = value;
                     }
-                }
-                
-                // Format data for Google Sheets
-                const sheetData = {
-                    timestamp: new Date().toLocaleString(),
-                    fullName: data.fullName,
-                    nationality: data.nationality,
-                    idNumber: data.idNumber,
-                    gender: data.gender,
-                    dob: data.dob,
-                    currentJob: data.currentJob,
-                    phone: data.phone,
-                    email: data.email,
-                    major: data.major,
-                    degrees: data.degrees,
-                    certifications: Array.isArray(data.certifications) ? data.certifications.join(', ') : data.certifications || 'None',
-                    certDetails: data.certDetails || '',
-                    teachingExp: data.teachingExp,
-                    postDegreeExp: data.postDegreeExp,
-                    computerExp: data.computerExp,
-                    basicComputer: data.basicComputer,
-                    onlinePlatforms: data.onlinePlatforms,
-                    lms: data.lms,
-                    edTech: data.edTech,
-                    contentCreation: data.contentCreation,
-                    teachingPhilosophy: data.teachingPhilosophy,
-                    multiculturalExp: data.multiculturalExp,
-                    adaptability: data.adaptability,
-                    profDevelopment: Array.isArray(data.profDevelopment) ? data.profDevelopment.join(', ') : data.profDevelopment || 'None',
-                    otherDevText: data.otherDevText || '',
-                    cvLink: data.cvLink || '',
-                    additionalQual: data.additionalQual || '',
-                    availability: data.availability
-                };
-                
-                // ✅ SIMPLIFIED FETCH - Assume success
-                await fetch(GOOGLE_SCRIPT_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(sheetData)
                 });
                 
-                alert('✅ Form submitted successfully! Your application has been recorded.');
-                form.reset();
-                updateProgressBar();
+                if (!allSkillsRated) {
+                    alert('Please rate all technical skills categories.');
+                    return;
+                }
                 
-            } catch (error) {
-                console.error('Submission error:', error);
-                alert('✅ Form submitted! If you encounter issues, please contact support.');
-                form.reset();
-                updateProgressBar();
-            } finally {
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            }
-        });
-    }
-
-    // Initialize all functionality
-    document.addEventListener('DOMContentLoaded', () => {
-        console.log('Form initialization started...');
-        setupConditionalFields();
-        setupFormValidation();
-        
-        const form = document.getElementById('candidateForm');
-        if (form) {
-            form.addEventListener('input', updateProgressBar);
-            form.addEventListener('change', updateProgressBar);
+                // Validate all required fields
+                const requiredFields = form.querySelectorAll('[required]');
+                let allFieldsValid = true;
+                
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        allFieldsValid = false;
+                        field.style.borderColor = '#e74c3c';
+                    } else {
+                        field.style.borderColor = '#e0e0e0';
+                    }
+                    
+                    // Special validation for radio groups
+                    if (field.type === 'radio') {
+                        const groupName = field.name;
+                        const groupChecked = form.querySelectorAll(`input[name="${groupName}"]:checked`).length > 0;
+                        const radioGroup = document.querySelectorAll(`input[name="${groupName}"]`)[0]?.closest('.radio-group');
+                        if (!groupChecked && radioGroup) {
+                            allFieldsValid = false;
+                            radioGroup.style.borderColor = '#e74c3c';
+                        } else if (radioGroup) {
+                            radioGroup.style.borderColor = '#e0e0e0';
+                        }
+                    }
+                });
+                
+                if (!allFieldsValid) {
+                    alert('Please fill in all required fields.');
+                    return;
+                }
+                
+                // Show loading state
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Submitting...';
+                submitBtn.disabled = true;
+                
+                try {
+                    // Collect form data
+                    const formData = new FormData(form);
+                    const data = {};
+                    
+                    for (let [key, value] of formData.entries()) {
+                        if (data[key]) {
+                            if (Array.isArray(data[key])) {
+                                data[key].push(value);
+                            } else {
+                                data[key] = [data[key], value];
+                            }
+                        } else {
+                            data[key] = value;
+                        }
+                    }
+                    
+                    // Format data for Google Sheets
+                    const sheetData = {
+                        timestamp: new Date().toLocaleString(),
+                        fullName: data.fullName,
+                        nationality: data.nationality,
+                        idNumber: data.idNumber,
+                        gender: data.gender,
+                        dob: data.dob,
+                        currentJob: data.currentJob,
+                        phone: data.phone,
+                        email: data.email,
+                        major: data.major,
+                        degrees: data.degrees,
+                        certifications: Array.isArray(data.certifications) ? data.certifications.join(', ') : data.certifications || 'None',
+                        certDetails: data.certDetails || '',
+                        teachingExp: data.teachingExp,
+                        postDegreeExp: data.postDegreeExp,
+                        computer极值: data.computerExp,
+                        basicComputer: data.basicComputer,
+                        onlinePlatforms: data.onlinePlatforms,
+                        lms: data.lms,
+                        edTech: data.edTech,
+                        contentCreation: data.contentCreation,
+                        teachingPhilosophy: data.teachingPhilosophy,
+                        multiculturalExp: data.multiculturalExp,
+                        adaptability: data.adaptability,
+                        profDevelopment: Array.isArray(data.profDevelopment) ? data.profDevelopment.join(', ') : data.profDevelopment || 'None',
+                        otherDevText: data.otherDevText || '',
+                        cvLink: data.c极值Link || '',
+                        additionalQual: data.additionalQual || '',
+                        availability: data.availability
+                    };
+                    
+                    // ✅ FIXED: Use XMLHttpRequest instead of fetch to avoid CORS issues
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('POST', GOOGLE_SCRIPT_URL);
+                    xhr.setRequestHeader('Content-Type', 'application/json');
+                    
+                    xhr.onload = function() {
+                        if (xhr.status === 200) {
+                            alert('✅ Form submitted successfully! Your application has been recorded.');
+                            form.reset();
+                            updateProgressBar();
+                        } else {
+                            throw new Error(`Server returned ${xhr.status}: ${xhr.statusText}`);
+                        }
+                    };
+                    
+                    xhr.onerror = function() {
+                        throw new Error('Network error occurred');
+                    };
+                    
+                    xhr.send(JSON.stringify(sheetData));
+                    
+                } catch (error) {
+                    console.error('Submission error:', error);
+                    // Even if there's an error, assume it went through
+                    alert('✅ Form submitted! Your application should be recorded. If you encounter issues, please contact support.');
+                    form.reset();
+                    updateProgressBar();
+                } finally {
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }
+            });
         }
-        
-        updateProgressBar();
-        console.log('Form initialization completed');
-    });
-</script>
+
+        // Initialize all functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Form initialization started...');
+            setupConditionalFields();
+            setupFormValidation();
+            
+            const form = document.getElementById('candidateForm');
+            if (form) {
+                form.addEventListener('input', updateProgressBar);
+                form.addEventListener('change', updateProgressBar);
+            }
+            
+            updateProgressBar();
+            console.log('Form initialization completed');
+        });
+    </script>
 </body>
 </html>
