@@ -434,10 +434,13 @@
             return isValid;
         }
 
-        // Form submission
+        // Form submission to Google Sheets
         function setupFormSubmission() {
             const form = document.getElementById('candidateForm');
             const submitBtn = form.querySelector('.submit-btn');
+            
+            // Replace with your Google Apps Script Web App URL
+            const scriptURL = 'https://script.google.com/macros/s/1zXHrJklgmof-aHCZmDrdjWdBtGYAC_9w4v6VqlyrMPqKrekvo9CUcXvj/exec';
             
             form.addEventListener('submit', async (e) => {
                 e.preventDefault();
@@ -453,8 +456,76 @@
                 submitBtn.disabled = true;
                 
                 try {
-                    // Simulate form submission (replace with actual API call)
-                    await new Promise(resolve => setTimeout(resolve, 2000));
+                    // Prepare form data
+                    const formData = new FormData(form);
+                    const data = {};
+                    
+                    // Convert FormData to object
+                    for (let [key, value] of formData.entries()) {
+                        if (data[key]) {
+                            // If the key already exists, convert to array
+                            if (Array.isArray(data[key])) {
+                                data[key].push(value);
+                            } else {
+                                data[key] = [data[key], value];
+                            }
+                        } else {
+                            data[key] = value;
+                        }
+                    }
+                    
+                    // Handle checkbox groups
+                    const certifications = [];
+                    document.querySelectorAll('input[name="certifications"]:checked').forEach(cb => {
+                        certifications.push(cb.value);
+                    });
+                    data.certifications = certifications;
+                    
+                    const profDevelopment = [];
+                    document.querySelectorAll('input[name="profDevelopment"]:checked').forEach(cb => {
+                        profDevelopment.push(cb.value);
+                    });
+                    data.profDevelopment = profDevelopment;
+                    
+                    // Handle radio groups
+                    const gender = document.querySelector('input[name="gender"]:checked');
+                    if (gender) data.gender = gender.value;
+                    
+                    const postDegreeExp = document.querySelector('input[name="postDegreeExp"]:checked');
+                    if (postDegreeExp) data.postDegreeExp = postDegreeExp.value;
+                    
+                    const basicComputer = document.querySelector('input[name="basicComputer"]:checked');
+                    if (basicComputer) data.basicComputer = basicComputer.value;
+                    
+                    const onlinePlatforms = document.querySelector('input[name="onlinePlatforms"]:checked');
+                    if (onlinePlatforms) data.onlinePlatforms = onlinePlatforms.value;
+                    
+                    const lms = document.querySelector('input[name="lms"]:checked');
+                    if (lms) data.lms = lms.value;
+                    
+                    const edTech = document.querySelector('input[name="edTech"]:checked');
+                    if (edTech) data.edTech = edTech.value;
+                    
+                    const contentCreation = document.querySelector('input[name="contentCreation"]:checked');
+                    if (contentCreation) data.contentCreation = contentCreation.value;
+                    
+                    // Handle file upload
+                    const cvFile = document.getElementById('cvUpload').files[0];
+                    if (cvFile) {
+                        // In a real implementation, you would need to handle file uploads differently
+                        // For now, we'll just store the file name
+                        data.cvUpload = cvFile.name;
+                    }
+                    
+                    // Send data to Google Apps Script
+                    const response = await fetch(scriptURL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data)
+                    });
                     
                     // Show success message
                     document.getElementById('successMessage').style.display = 'block';
