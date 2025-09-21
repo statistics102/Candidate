@@ -1,566 +1,1817 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Candidate Screening Form - Teaching Positions</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
-        .container { max-width: 800px; margin: 0 auto; background: white; border-radius: 16px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); overflow: hidden; }
-        .header { background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); color: white; padding: 30px; text-align: center; }
-        .header h1 { font-size: 2.2em; margin-bottom: 10px; }
-        .header p { font-size: 1.1em; opacity: 0.9; }
-        .form-content { padding: 40px; }
-        .section { margin-bottom: 40px; opacity: 0; transform: translateY(20px); animation: fadeInUp 0.6s ease forwards; }
-        .section:nth-child(1) { animation-delay: 0.1s; }
-        .section:nth-child(2) { animation-delay: 0.2s; }
-        .section:nth-child(3) { animation-delay: 0.3s; }
-        .section:nth-child(4) { animation-delay: 0.4s; }
-        .section:nth-child(5) { animation-delay: 0.5s; }
-        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
-        .section-title { font-size: 1.5em; color: #2c3e50; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 3px solid #3498db; position: relative; }
-        .section-title::before { content: ''; position: absolute; bottom: -3px; left: 0; width: 50px; height: 3px; background: #e74c3c; }
-        .form-group { margin-bottom: 25px; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #34495e; font-size: 1.05em; }
-        .required { color: #e74c3c; }
-        input[type="text"], input[type="email"], input[type="tel"], input[type="date"], input[type="file"], input[type="url"], select, textarea { width: 100%; padding: 12px 15px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1em; transition: all 0.3s ease; background: #fafafa; }
-        input:focus, select:focus, textarea:focus { outline: none; border-color: #3498db; background: white; box-shadow: 0 0 10px rgba(52, 152, 219, 0.1); }
-        textarea { resize: vertical; min-height: 100px; }
-        .checkbox-group, .radio-group { display: flex; flex-direction: column; gap: 10px; }
-        .checkbox-item, .radio-item { display: flex; align-items: center; padding: 10px; border: 1px solid #e0e0e0; border-radius: 8px; transition: all 0.3s ease; cursor: pointer; }
-        .checkbox-item:hover, .radio-item:hover { background: #f8f9fa; border-color: #3498db; }
-        .checkbox-item input, .radio-item input { margin-right: 10px; transform: scale(1.2); }
-        .scale-group { display: grid; gap: 15px; }
-        .scale-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: #f8f9fa; border-radius: 8px; border: 1px solid #e0e0e0; }
-        .scale-options { display: flex; gap: 15px; }
-        .scale-options input[type="radio"] { width: auto; margin: 0; }
-        .scale-label { font-weight: 500; color: #2c3e50; flex: 1; }
-        .submit-section { text-align: center; margin-top: 40px; padding-top: 30px; border-top: 2px solid #ecf0f1; }
-        .submit-btn { background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); color: white; padding: 15px 40px; border: none; border-radius: 50px; font-size: 1.1em; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3); }
-        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 25px rgba(52, 152, 219, 0.4); }
-        .submit-btn:active { transform: translateY(0); }
-        .progress-bar { height: 4px; background: #ecf0f1; position: fixed; top: 0; left: 0; right: 0; z-index: 1000; }
-        .progress-fill { height: 100%; background: linear-gradient(90deg, #3498db, #2980b9); width: 0%; transition: width 0.3s ease; }
-        .conditional { display: none; margin-top: 15px; padding: 15px; background: #f0f8ff; border-left: 4px solid #3498db; border-radius: 0 8px 8px 0; }
-        .error { color: #e74c3c; font-size: 0.9em; margin-top: 5px; display: none; }
-        input.error-field, textarea.error-field { border-color: #e74c3c; }
-        .success-message { display: none; background: #d4edda; color: #155724; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: center; }
-        @media (max-width: 768px) { 
-            .form-content { padding: 20px; } 
-            .header { padding: 20px; } 
-            .header h1 { font-size: 1.8em; } 
-            .scale-item { flex-direction: column; align-items: flex-start; gap: 10px; } 
-            .scale-options { justify-content: space-between; width: 100%; } 
-        }
-    </style>
+<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+<meta name=Generator content="Microsoft Word 15 (filtered)">
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:"Segoe UI Emoji";
+	panose-1:2 11 5 2 4 2 4 2 2 3;}
+@font-face
+	{font-family:Consolas;
+	panose-1:2 11 6 9 2 2 4 3 2 4;}
+@font-face
+	{font-family:"Segoe UI";
+	panose-1:2 11 5 2 4 2 4 2 2 3;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}
+a:link, span.MsoHyperlink
+	{color:#1F4E79;
+	text-decoration:underline;}
+.MsoChpDefault
+	{font-size:10.0pt;
+	font-family:"Calibri",sans-serif;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+-->
+</style>
+
 </head>
-<body>
-    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-    <div class="container">
-        <div class="header"><h1>Candidate Screening Form</h1><p>Teaching Positions - Complete Assessment</p></div>
-        <div class="success-message" id="successMessage">
-            <h3>✅ Application Submitted Successfully!</h3>
-            <p>Thank you for your application. We will review your information and contact you soon.</p>
-        </div>
-        <form class="form-content" id="candidateForm">
-            <!-- Section 1: Personal and Professional Data -->
-            <div class="section">
-                <h2 class="section-title">Personal and Professional Data Collection</h2>
-                <div class="form-group">
-                    <label for="fullName">Full Name <span class="required">*</span></label>
-                    <input type="text" id="fullName" name="fullName" required>
-                    <div class="error" id="fullNameError">Please enter your full name</div>
-                </div>
-                <div class="form-group">
-                    <label for="nationality">Nationality <span class="required">*</span></label>
-                    <input type="text" id="nationality" name="nationality" required placeholder="USA, UK, Canada, Australia, etc.">
-                    <div class="error" id="nationalityError">Please enter your nationality</div>
-                </div>
-                <div class="form-group">
-                    <label for="idNumber">National ID or Passport Number <span class="required">*</span></label>
-                    <input type="text" id="idNumber" name="idNumber" required>
-                    <div class="error" id="idNumberError">Please enter your ID or passport number</div>
-                </div>
-                <div class="form-group">
-                    <label for="gender">Gender <span class="required">*</span></label>
-                    <div class="radio-group" id="genderGroup">
-                        <div class="radio-item"><input type="radio" id="male" name="gender" value="male" required><label for="male">Male</label></div>
-                        <div class="radio-item"><input type="radio" id="female" name="gender" value="female" required><label for="female">Female</label></div>
-                        <div class="radio-item"><input type="radio" id="preferNotToSay" name="gender" value="prefer-not-to-say" required><label for="preferNotToSay">Prefer not to say</label></div>
-                    </div>
-                    <div class="error" id="genderError">Please select your gender</div>
-                </div>
-                <div class="form-group">
-                    <label for="dob">Date of Birth <span class="required">*</span></label>
-                    <input type="date" id="dob" name="dob" required>
-                    <div class="error" id="dobError">Please enter your date of birth</div>
-                </div>
-                <div class="form-group">
-                    <label for="currentJob">Current Job Title <span class="required">*</span></label>
-                    <input type="text" id="currentJob" name="currentJob" required placeholder="If unemployed, write 'Currently seeking employment'">
-                    <div class="error" id="currentJobError">Please enter your current job title</div>
-                </div>
-                <div class="form-group">
-                    <label for="phone">Phone Number <span class="required">*</span></label>
-                    <input type="tel" id="phone" name="phone" required placeholder="+Country Code followed by your phone number">
-                    <div class="error" id="phoneError">Please enter a valid phone number</div>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email Address <span class="required">*</span></label>
-                    <input type="email" id="email" name="email" required placeholder="your.email@example.com">
-                    <div class="error" id="emailError">Please enter a valid email address</div>
-                </div>
-            </div>
 
-            <!-- Section 2: Educational Background -->
-            <div class="section">
-                <h2 class="section-title">Educational Background and Qualifications</h2>
-                <div class="form-group">
-                    <label for="major">Education Major/Field of Study <span class="required">*</span></label>
-                    <input type="text" id="major" name="major" required placeholder="e.g., English Language, Computer Science">
-                    <div class="error" id="majorError">Please enter your field of study</div>
-                </div>
-                <div class="form-group">
-                    <label for="degrees">Academic Degrees <span class="required">*</span></label>
-                    <textarea id="degrees" name="degrees" required placeholder="List all degrees with institution names and graduation years"></textarea>
-                    <div class="error" id="degreesError">Please list your academic degrees</div>
-                </div>
-                <div class="form-group">
-                    <label>Relevant Professional Certifications (Select all that apply)</label>
-                    <div class="checkbox-group">
-                        <div class="checkbox-item"><input type="checkbox" id="delta" name="certifications" value="DELTA"><label for="delta">DELTA</label></div>
-                        <div class="checkbox-item"><input type="checkbox" id="celta" name="certifications" value="CELTA"><label for="celta">CELTA</label></div>
-                        <div class="checkbox-item"><input type="checkbox" id="tesol" name="certifications" value="TESOL"><label for="tesol">TESOL</label></div>
-                        <div class="checkbox-item"><input type="checkbox" id="tefl" name="certifications" value="TEFL"><label for="tefl">TEFL</label></div>
-                        <div class="checkbox-item"><input type="checkbox" id="otherCert" name="certifications" value="Other"><label for="otherCert">Other relevant teaching certifications</label></div>
-                        <div class="checkbox-item"><input type="checkbox" id="noCert" name="certifications" value="None"><label for="noCert">None of the above</label></div>
-                    </div>
-                </div>
-                <div class="conditional" id="certDetailsGroup">
-                    <label for="certDetails">Certification Details</label>
-                    <textarea id="certDetails" name="certDetails" placeholder="Institution names, completion dates, and certificate numbers"></textarea>
-                </div>
-            </div>
+<body lang=EN-US link="#1F4E79" vlink="#954F72" style='word-wrap:break-word'>
 
-            <!-- Section 3: Professional Experience -->
-            <div class="section">
-                <h2 class="section-title">Professional Experience and Skills</h2>
-                <div class="form-group">
-                    <label for="teachingExp">Teaching Experience <span class="required">*</span></label>
-                    <textarea id="teachingExp" name="teachingExp" required placeholder="How many years? Specify contexts and age groups taught"></textarea>
-                    <div class="error" id="teachingExpError">Please describe your teaching experience</div>
-                </div>
-                <div class="form-group">
-                    <label for="postDegreeExp">Post-Degree Teaching Experience <span class="required">*</span></label>
-                    <div class="radio-group" id="postDegreeExpGroup">
-                        <div class="radio-item"><input type="radio" id="expYes" name="postDegreeExp" value="yes" required><label for="expYes">Yes, I have 2+ years post-master's teaching experience</label></div>
-                        <div class="radio-item"><input type="radio" id="expSaudi" name="postDegreeExp" value="saudi" required><label for="expSaudi">No, but I am a Saudi national</label></div>
-                        <div class="radio-item"><input type="radio" id="expNo" name="postDegreeExp" value="no" required><label for="expNo">No, I do not meet this requirement</label></div>
-                        <div class="radio-item"><input type="radio" id="expNA" name="postDegreeExp" value="na" required><label for="expNA">Not applicable (I am a native English speaker)</label></div>
-                    </div>
-                    <div class="error" id="postDegreeExpError">Please select an option</div>
-                </div>
-                <div class="form-group">
-                    <label for="computerExp">Computer Literacy and Technology Integration <span class="required">*</span></label>
-                    <textarea id="computerExp" name="computerExp" required placeholder="Describe your experience using computer technology in teaching"></textarea>
-                    <div class="error" id="computerExpError">Please describe your computer literacy</div>
-                </div>
-                <div class="form-group">
-                    <label>Technical Skills Assessment <span class="required">*</span></label>
-                    <div class="scale-group">
-                        <div class="scale-item">
-                            <div class="scale-label">Basic computer operations (Word, Excel, PowerPoint)</div>
-                            <div class="scale-options">
-                                <span>Beginner</span>
-                                <input type="radio" name="basicComputer" value="1" required>
-                                <input type="radio" name="basicComputer" value="2" required>
-                                <input type="radio" name="basicComputer" value="3" required>
-                                <input type="radio" name="basicComputer" value="4" required>
-                                <input type="radio" name="basicComputer" value="5" required>
-                                <span>Expert</span>
-                            </div>
-                            <div class="error" id="basicComputerError">Please rate your skills</div>
-                        </div>
-                        <div class="scale-item">
-                            <div class="scale-label">Online teaching platforms (Zoom, Teams, Google Classroom)</div>
-                            <div class="scale-options">
-                                <span>Beginner</span>
-                                <input type="radio" name="onlinePlatforms" value="1" required>
-                                <input type="radio" name="onlinePlatforms" value="2" required>
-                                <input type="radio" name="onlinePlatforms" value="3" required>
-                                <input type="radio" name="onlinePlatforms" value="4" required>
-                                <input type="radio" name="onlinePlatforms" value="5" required>
-                                <span>Expert</span>
-                            </div>
-                            <div class="error" id="onlinePlatformsError">Please rate your skills</div>
-                        </div>
-                        <div class="scale-item">
-                            <div class="scale-label">Learning Management Systems (Moodle, Blackboard, Canvas)</div>
-                            <div class="scale-options">
-                                <span>Beginner</span>
-                                <input type="radio" name="lms" value="1" required>
-                                <input type="radio" name="lms" value="2" required>
-                                <input type="radio" name="lms" value="3" required>
-                                <input type="radio" name="lms" value="4" required>
-                                <input type="radio" name="lms" value="5" required>
-                                <span>Expert</span>
-                            </div>
-                            <div class="error" id="lmsError">Please rate your skills</div>
-                        </div>
-                        <div class="scale-item">
-                            <div class="scale-label">Educational technology tools (interactive whiteboards, educational apps)</div>
-                            <div class="scale-options">
-                                <span>Beginner</span>
-                                <input type="radio" name="edTech" value="1" required>
-                                <input type="radio" name="edTech" value="2" required>
-                                <input type="radio" name="edTech" value="3" required>
-                                <input type="radio" name="edTech" value="4" required>
-                                <input type="radio" name="edTech" value="5" required>
-                                <span>Expert</span>
-                            </div>
-                            <div class="error" id="edTechError">Please rate your skills</div>
-                        </div>
-                        <div class="scale-item">
-                            <div class="scale-label">Content creation tools (video editing, presentation software)</div>
-                            <div class="scale-options">
-                                <span>Beginner</span>
-                                <input type="radio" name="contentCreation" value="1" required>
-                                <input type="radio" name="contentCreation" value="2" required>
-                                <input type="radio" name="contentCreation" value="3" required>
-                                <input type="radio" name="contentCreation" value="4" required>
-                                <input type="radio" name="contentCreation" value="5" required>
-                                <span>Expert</span>
-                            </div>
-                            <div class="error" id="contentCreationError">Please rate your skills</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class=WordSection1>
 
-            <!-- Section 4: Cultural Fit -->
-            <div class="section">
-                <h2 class="section-title">Cultural Fit and Motivation</h2>
-                <div class="form-group">
-                    <label for="teachingPhilosophy">Teaching Philosophy <span class="required">*</span></label>
-                    <textarea id="teachingPhilosophy" name="teachingPhilosophy" required placeholder="Briefly describe your teaching philosophy"></textarea>
-                    <div class="error" id="teachingPhilosophyError">Please describe your teaching philosophy</div>
-                </div>
-                <div class="form-group">
-                    <label for="multiculturalExp">Multicultural Experience <span class="required">*</span></label>
-                    <textarea id="multiculturalExp" name="multiculturalExp" required placeholder="Experience working in multicultural environments"></textarea>
-                    <div class="error" id="multiculturalExpError">Please describe your multicultural experience</div>
-                </div>
-                <div class="form-group">
-                    <label for="adaptability">Adaptability and Flexibility <span class="required">*</span></label>
-                    <textarea id="adaptability" name="adaptability" required placeholder="Describe adapting teaching methods"></textarea>
-                    <div class="error" id="adaptabilityError">Please describe your adaptability</div>
-                </div>
-                <div class="form-group">
-                    <label>Professional Development Commitment (Select all that apply)</label>
-                    <div class="checkbox-group">
-                        <div class="checkbox-item"><input type="checkbox" id="profCourses" name="profDevelopment" value="courses"><label for="profCourses">Regular professional development courses</label></div>
-                        <div class="checkbox-item"><input type="checkbox" id="conferences" name="profDevelopment" value="conferences"><label for="conferences">Academic conferences and workshops</label></div>
-                        <div class="checkbox-item"><input type="checkbox" id="associations" name="profDevelopment" value="associations"><label for="associations">Professional associations and networks</label></div>
-                        <div class="checkbox-item"><input type="checkbox" id="onlineLearning" name="profDevelopment" value="online"><label for="onlineLearning">Online learning and webinars</label></div>
-                        <div class="checkbox-item"><input type="checkbox" id="peerCollab" name="profDevelopment" value="peer"><label for="peerCollab">Peer collaboration and mentoring</label></div>
-                        <div class="checkbox-item"><input type="checkbox" id="otherDev" name="profDevelopment" value="other"><label for="otherDev">Other (please specify below)</label></div>
-                    </div>
-                    <div class="conditional" id="otherDevGroup">
-                        <input type="text" id="otherDevText" name="otherDevText" placeholder="Please specify other professional development activities">
-                    </div>
-                </div>
-            </div>
+<p class=MsoNormal><b>English Candidates Dashboard </b></p>
 
-            <!-- Section 5: Documentation -->
-            <div class="section">
-                <h2 class="section-title">Documentation and Additional Information</h2>
-                <div class="form-group">
-                    <label for="cvUpload">CV/Resume Upload <span class="required">*</span></label>
-                    <input type="file" id="cvUpload" name="cvUpload" accept=".pdf,.doc,.docx" required>
-                    <small style="color: #7f8c8d; margin-top: 5px; display: block;">Or provide a link to your professional profile below:</small>
-                    <input type="url" id="cvLink" name="cvLink" placeholder="https://linkedin.com/in/yourprofile" style="margin-top: 10px;">
-                    <div class="error" id="cvUploadError">Please upload your CV or provide a link</div>
-                </div>
-                <div class="form-group">
-                    <label for="additionalQual">Additional Qualifications</label>
-                    <textarea id="additionalQual" name="additionalQual" placeholder="List any additional qualifications or experiences"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="availability">Availability and Preferences <span class="required">*</span></label>
-                    <textarea id="availability" name="availability" required placeholder="Preferred start date and scheduling constraints"></textarea>
-                    <div class="error" id="availabilityError">Please provide your availability</div>
-                </div>
-            </div>
+<p class=MsoNormal>Candidate Screening Form</p>
 
-            <div class="submit-section">
-                <button type="submit" class="submit-btn">Submit Application</button>
-            </div>
-        </form>
-    </div>
+<p class=MsoNormal>Teaching Positions - Complete Assessment</p>
 
-    <script>
-        // Progress bar functionality
-        function updateProgressBar() {
-            const form = document.getElementById('candidateForm');
-            if (!form) return;
-            
-            const inputs = form.querySelectorAll('input[required], textarea[required], select[required]');
-            const radioGroups = {};
-            
-            inputs.forEach(input => { 
-                if (input.type === 'radio') { 
-                    if (!radioGroups[input.name]) radioGroups[input.name] = []; 
-                    radioGroups[input.name].push(input); 
-                } 
-            });
-            
-            let totalFields = 0;
-            let completedFields = 0;
-            
-            inputs.forEach(input => { 
-                if (input.type !== 'radio') { 
-                    totalFields++; 
-                    if (input.value.trim() !== '') completedFields++; 
-                } 
-            });
-            
-            Object.keys(radioGroups).forEach(groupName => { 
-                totalFields++; 
-                if (radioGroups[groupName].some(radio => radio.checked)) completedFields++; 
-            });
-            
-            const progress = (completedFields / totalFields) * 100;
-            const progressFill = document.getElementById('progressFill'); 
-            
-            if (progressFill) {
-                progressFill.style.width = progress + '%';
-            }
-        }
+<p class=MsoNormal>Personal and Professional Data Collection</p>
 
-        // Conditional field display
-        function setupConditionalFields() {
-            const certCheckboxes = document.querySelectorAll('input[name="certifications"]');
-            const certDetailsGroup = document.getElementById('certDetailsGroup');
-            const noCertCheckbox = document.getElementById('noCert');
-            const otherDevCheckbox = document.getElementById('otherDev');
-            const otherDevGroup = document.getElementById('otherDevGroup');
-            
-            if (certDetailsGroup && noCertCheckbox) {
-                certCheckboxes.forEach(checkbox => { 
-                    checkbox.addEventListener('change', () => {
-                        if (noCertCheckbox.checked) { 
-                            certCheckboxes.forEach(cb => { 
-                                if (cb !== noCertCheckbox) cb.checked = false; 
-                            }); 
-                            certDetailsGroup.style.display = 'none'; 
-                        } else { 
-                            const anyChecked = Array.from(certCheckboxes)
-                                .filter(cb => cb !== noCertCheckbox)
-                                .some(cb => cb.checked); 
-                            certDetailsGroup.style.display = anyChecked ? 'block' : 'none'; 
-                            if (anyChecked) noCertCheckbox.checked = false; 
-                        }
-                    }); 
-                });
-            }
-            
-            if (otherDevCheckbox && otherDevGroup) { 
-                otherDevCheckbox.addEventListener('change', () => { 
-                    otherDevGroup.style.display = otherDevCheckbox.checked ? 'block' : 'none'; 
-                }); 
-            }
-        }
+<p class=MsoNormal>Educational Background and Qualifications</p>
 
-        // Form validation
-        function validateForm() {
-            let isValid = true;
-            const form = document.getElementById('candidateForm');
-            
-            // Clear previous errors
-            const errorElements = form.querySelectorAll('.error');
-            errorElements.forEach(el => el.style.display = 'none');
-            
-            const errorInputs = form.querySelectorAll('.error-field');
-            errorInputs.forEach(el => el.classList.remove('error-field'));
-            
-            // Validate required fields
-            const requiredFields = form.querySelectorAll('[required]');
-            requiredFields.forEach(field => {
-                if (field.type === 'radio') {
-                    const groupName = field.name;
-                    const groupChecked = form.querySelectorAll(`input[name="${groupName}"]:checked`).length > 0;
-                    
-                    if (!groupChecked) {
-                        isValid = false;
-                        const errorElement = document.getElementById(`${groupName}Error`);
-                        if (errorElement) errorElement.style.display = 'block';
-                        
-                        // Highlight the radio group
-                        const radioGroup = document.getElementById(`${groupName}Group`);
-                        if (radioGroup) radioGroup.style.border = '1px solid #e74c3c';
-                    }
-                } else if (field.type === 'file') {
-                    // Check if either file is uploaded or link is provided
-                    const fileValue = field.value;
-                    const cvLink = document.getElementById('cvLink').value;
-                    
-                    if (!fileValue && !cvLink) {
-                        isValid = false;
-                        const errorElement = document.getElementById(`${field.id}Error`);
-                        if (errorElement) errorElement.style.display = 'block';
-                        field.classList.add('error-field');
-                    }
-                } else {
-                    if (!field.value.trim()) {
-                        isValid = false;
-                        const errorElement = document.getElementById(`${field.id}Error`);
-                        if (errorElement) errorElement.style.display = 'block';
-                        field.classList.add('error-field');
-                    }
-                }
-            });
-            
-            // Validate email format
-            const emailField = document.getElementById('email');
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (emailField.value && !emailRegex.test(emailField.value)) {
-                isValid = false;
-                document.getElementById('emailError').textContent = 'Please enter a valid email address';
-                document.getElementById('emailError').style.display = 'block';
-                emailField.classList.add('error-field');
-            }
-            
-            return isValid;
-        }
+<p class=MsoNormal>Professional Experience and Skills</p>
 
-        // Form submission to Google Sheets
-        function setupFormSubmission() {
-            const form = document.getElementById('candidateForm');
-            const submitBtn = form.querySelector('.submit-btn');
-            
-            // Replace with your Google Apps Script Web App URL
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbx9SqUMgKtkadm8yPrPnniOQETVlC3lrLHmdilAVGTztNIkZwlIYrds2EyBw7lVBLVl/exec';
-            
-            form.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                
-                if (!validateForm()) {
-                    alert('Please fill in all required fields correctly.');
-                    return;
-                }
-                
-                // Show loading state
-                const originalText = submitBtn.textContent;
-                submitBtn.textContent = 'Submitting...';
-                submitBtn.disabled = true;
-                
-                try {
-                    // Prepare form data
-                    const formData = new FormData(form);
-                    const data = {};
-                    
-                    // Convert FormData to object
-                    for (let [key, value] of formData.entries()) {
-                        if (data[key]) {
-                            // If the key already exists, convert to array
-                            if (Array.isArray(data[key])) {
-                                data[key].push(value);
-                            } else {
-                                data[key] = [data[key], value];
-                            }
-                        } else {
-                            data[key] = value;
-                        }
-                    }
-                    
-                    // Handle checkbox groups
-                    const certifications = [];
-                    document.querySelectorAll('input[name="certifications"]:checked').forEach(cb => {
-                        certifications.push(cb.value);
-                    });
-                    data.certifications = certifications;
-                    
-                    const profDevelopment = [];
-                    document.querySelectorAll('input[name="profDevelopment"]:checked').forEach(cb => {
-                        profDevelopment.push(cb.value);
-                    });
-                    data.profDevelopment = profDevelopment;
-                    
-                    // Handle radio groups
-                    const gender = document.querySelector('input[name="gender"]:checked');
-                    if (gender) data.gender = gender.value;
-                    
-                    const postDegreeExp = document.querySelector('input[name="postDegreeExp"]:checked');
-                    if (postDegreeExp) data.postDegreeExp = postDegreeExp.value;
-                    
-                    const basicComputer = document.querySelector('input[name="basicComputer"]:checked');
-                    if (basicComputer) data.basicComputer = basicComputer.value;
-                    
-                    const onlinePlatforms = document.querySelector('input[name="onlinePlatforms"]:checked');
-                    if (onlinePlatforms) data.onlinePlatforms = onlinePlatforms.value;
-                    
-                    const lms = document.querySelector('input[name="lms"]:checked');
-                    if (lms) data.lms = lms.value;
-                    
-                    const edTech = document.querySelector('input[name="edTech"]:checked');
-                    if (edTech) data.edTech = edTech.value;
-                    
-                    const contentCreation = document.querySelector('input[name="contentCreation"]:checked');
-                    if (contentCreation) data.contentCreation = contentCreation.value;
-                    
-                    // Handle file upload
-                    const cvFile = document.getElementById('cvUpload').files[0];
-                    if (cvFile) {
-                        // In a real implementation, you would need to handle file uploads differently
-                        // For now, we'll just store the file name
-                        data.cvUpload = cvFile.name;
-                    }
-                    
-                    // Send data to Google Apps Script
-                    const response = await fetch(scriptURL, {
-                        method: 'POST',
-                        mode: 'no-cors',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(data)
-                    });
-                    
-                    // Show success message
-                    document.getElementById('successMessage').style.display = 'block';
-                    form.reset();
-                    
-                    // Reset progress bar
-                    const progressFill = document.getElementById('progressFill');
-                    if (progressFill) progressFill.style.width = '0%';
-                    
-                    // Scroll to top
-                    window.scrollTo(0, 0);
-                    
-                } catch (error) {
-                    console.error('Submission error:', error);
-                    alert('There was an error submitting your form. Please try again.');
-                } finally {
-                    submitBtn.textContent = originalText;
-                    submitBtn.disabled = false;
-                }
-            });
-        }
+<p class=MsoNormal>Cultural Fit and Motivation</p>
 
-        // Initialize all functionality
-        document.addEventListener('DOMContentLoaded', () => {
-            setupConditionalFields();
-            setupFormSubmission();
-            
-            const form = document.getElementById('candidateForm');
-            if (form) {
-                form.addEventListener('input', updateProgressBar);
-                form.addEventListener('change', updateProgressBar);
-            }
-            
-            updateProgressBar();
-        });
-    </script>
+<p class=MsoNormal>Documentation and Additional Information</p>
+
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0 width=1200
+ style='width:12.5in;margin-left:-4.9pt;border-collapse:collapse;border:none'>
+ <thead>
+  <tr>
+   <td width=186 style='width:139.5pt;border:solid #E5E5E5 1.0pt;background:
+   #F9FAFB;padding:.75pt .75pt .75pt .75pt'>
+   <p class=MsoNormal>Candidate Info</p>
+   </td>
+   <td width=239 style='width:179.1pt;border:solid #E5E5E5 1.0pt;border-left:
+   none;background:#F9FAFB;padding:.75pt .75pt .75pt .75pt'>
+   <p class=MsoNormal><span style='color:black'>Contact</span></p>
+   </td>
+   <td width=331 style='width:248.6pt;border:solid #E5E5E5 1.0pt;border-left:
+   none;background:#F9FAFB;padding:.75pt .75pt .75pt .75pt'>
+   <p class=MsoNormal><span style='color:black'>Education</span></p>
+   </td>
+   <td width=186 style='width:139.3pt;border:solid #E5E5E5 1.0pt;border-left:
+   none;background:#F9FAFB;padding:.75pt .75pt .75pt .75pt'>
+   <p class=MsoNormal><span style='color:black'>Experience</span></p>
+   </td>
+   <td width=168 style='width:1.75in;border:solid #E5E5E5 1.0pt;border-left:
+   none;background:#F9FAFB;padding:.75pt .75pt .75pt .75pt'>
+   <p class=MsoNormal><span style='color:black'>CV/Documents</span></p>
+   </td>
+   <td width=90 style='width:67.5pt;border:solid #E5E5E5 1.0pt;border-left:
+   none;background:white;padding:.75pt .75pt .75pt .75pt'>
+   <p class=MsoNormal><span style='color:black'>Submitted</span></p>
+   </td>
+  </tr>
+ </thead>
+ <tr>
+  <td width=186 nowrap style='width:139.5pt;border:solid #E5E5E5 1.0pt;
+  border-top:none;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>TUGBA
+  ISMAIL</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>BRITISH&nbsp;•&nbsp;Female</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>English
+  Coordinator at Shaqra University</span></p>
+  </td>
+  <td width=239 nowrap style='width:179.1pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>itugba670@gmail.com</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>0500762371</span></p>
+  </td>
+  <td width=331 style='width:248.6pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Phd
+  in Educational Sciences,TESOL,USA,MA Education,London/UK, B.A ELT Cyprus,UK
+  QTLS, UK Advanced TEFL for experinced English Teachers</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>PHD
+  in Educational Sciences,TESOL,USA MA Education...</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#2563EB'>2&nbsp;certification(s)</span></p>
+  </td>
+  <td width=186 style='width:139.3pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Not
+  applicable (I am a native English speaker)</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Tech
+  Skills:&nbsp;10/10 avg</span></p>
+  </td>
+  <td width=168 nowrap style='width:1.75in;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><a
+  href="https://excel-form-data-1.preview.emergentagent.com/api/candidates/a6bb4151-de30-4fb8-bd6e-c5a2891937bf/download-cv"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#166534;border:solid #E5E5E5 1.0pt;padding:0in;background:#DCFCE7'>&#128196;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#166534;border:solid #E5E5E5 1.0pt;
+  padding:0in;background:#DCFCE7'> Download CV</span></a></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>a6bb4151-de30-4fb8-b...</span></p>
+  </td>
+  <td width=90 nowrap style='width:67.5pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>9/10/2025<br>
+  7:39:22 AM</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=186 nowrap style='width:139.5pt;border:solid #E5E5E5 1.0pt;
+  border-top:none;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Hanin
+  Ahmed Almohammed</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Saudi&nbsp;•&nbsp;Female</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Unemployed
+  - I was an instructor</span></p>
+  </td>
+  <td width=239 nowrap style='width:179.1pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>almohammed.h.94@gmail.com</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>0506636990</span></p>
+  </td>
+  <td width=331 style='width:248.6pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>English
+  Language - Applied Linguistic (TEFL)</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Master
+  Degree</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#2563EB'>1&nbsp;certification(s)</span></p>
+  </td>
+  <td width=186 style='width:139.3pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Yes,
+  I have 2+ years post-master's teaching experience</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Tech
+  Skills:&nbsp;9/10 avg</span></p>
+  </td>
+  <td width=168 nowrap style='width:1.75in;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><a
+  href="https://excel-form-data-1.preview.emergentagent.com/api/candidates/4deef8f7-6134-456f-9070-9aae1d65b722/download-cv"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#166534;border:solid #E5E5E5 1.0pt;padding:0in;background:#DCFCE7'>&#128196;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#166534;border:solid #E5E5E5 1.0pt;
+  padding:0in;background:#DCFCE7'> Download CV</span></a></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>4deef8f7-6134-456f-9...</span></p>
+  </td>
+  <td width=90 nowrap style='width:67.5pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>9/10/2025<br>
+  7:57:34 AM</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=186 nowrap style='width:139.5pt;border:solid #E5E5E5 1.0pt;
+  border-top:none;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Ali
+  Hassan Sayed Morsy</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Egyptian&nbsp;•&nbsp;Male</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Assistant
+  professor</span></p>
+  </td>
+  <td width=239 nowrap style='width:179.1pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>alihassan_1177@yahoo.com</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>0534504436</span></p>
+  </td>
+  <td width=331 style='width:248.6pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>English
+  Language- Linguistics</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>PhD
+  in English Linguistics 2016 MA in English Ling...</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#2563EB'>1&nbsp;certification(s)</span></p>
+  </td>
+  <td width=186 style='width:139.3pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Yes,
+  I have 2+ years post-master's teaching experience</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Tech
+  Skills:&nbsp;5/10 avg</span></p>
+  </td>
+  <td width=168 nowrap style='width:1.75in;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><a
+  href="https://excel-form-data-1.preview.emergentagent.com/api/candidates/8ce7ad83-e578-4a5a-a1f2-caaeb2a7f86f/download-cv"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#166534;border:solid #E5E5E5 1.0pt;padding:0in;background:#DCFCE7'>&#128196;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#166534;border:solid #E5E5E5 1.0pt;
+  padding:0in;background:#DCFCE7'> Download CV</span></a></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>8ce7ad83-e578-4a5a-a...</span></p>
+  </td>
+  <td width=90 nowrap style='width:67.5pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>9/10/2025<br>
+  11:10:04 AM</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=186 nowrap style='width:139.5pt;border:solid #E5E5E5 1.0pt;
+  border-top:none;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Reem
+  Alotaibi</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Saudi&nbsp;•&nbsp;Female</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>English
+  Teacher</span></p>
+  </td>
+  <td width=239 nowrap style='width:179.1pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>reemalotaibi378@gmail.com</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>0533865933</span></p>
+  </td>
+  <td width=331 style='width:248.6pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>English
+  Language/Applied Linguistics with a focus on TEFL</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>MA
+  in Applied Linguistics with a BA in English Lan...</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#2563EB'>2&nbsp;certification(s)</span></p>
+  </td>
+  <td width=186 style='width:139.3pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Yes,
+  I have 2+ years post-master's teaching experience</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Tech
+  Skills:&nbsp;10/10 avg</span></p>
+  </td>
+  <td width=168 nowrap style='width:1.75in;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><a
+  href="https://excel-form-data-1.preview.emergentagent.com/api/candidates/ed825dfa-b2a7-4882-ae60-141e0b21d460/download-cv"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#166534;border:solid #E5E5E5 1.0pt;padding:0in;background:#DCFCE7'>&#128196;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#166534;border:solid #E5E5E5 1.0pt;
+  padding:0in;background:#DCFCE7'> Download CV</span></a></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>ed825dfa-b2a7-4882-a...</span></p>
+  <p class=MsoNormal><a
+  href="https://www.linkedin.com/in/reem-alotaibi-559474319?utm_source=share&amp;utm_campaign=share_via&amp;utm_content=profile&amp;utm_medium=ios_app"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#2563EB;border:solid #E5E5E5 1.0pt;padding:0in'>&#128279;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#2563EB;border:solid #E5E5E5 1.0pt;
+  padding:0in'> Profile Link</span></a></p>
+  </td>
+  <td width=90 nowrap style='width:67.5pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>9/10/2025<br>
+  11:51:06 AM</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=186 nowrap style='width:139.5pt;border:solid #E5E5E5 1.0pt;
+  border-top:none;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Ahmed
+  Abdelkader Mohamed Elshamy</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Egyptian&nbsp;•&nbsp;Male</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>EFL
+  Instructor and Test Writing Coordinator</span></p>
+  </td>
+  <td width=239 nowrap style='width:179.1pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>ahmedabd_99@yahoo.com</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>0542685657</span></p>
+  </td>
+  <td width=331 style='width:248.6pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>TESOL,
+  TEFL, Language and Media studies</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>PhD
+  of Language and Media Studies, Master of TESOL...</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#2563EB'>2&nbsp;certification(s)</span></p>
+  </td>
+  <td width=186 style='width:139.3pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Yes,
+  I have 2+ years post-master's teaching experience</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Tech
+  Skills:&nbsp;10/10 avg</span></p>
+  </td>
+  <td width=168 nowrap style='width:1.75in;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><a
+  href="https://excel-form-data-1.preview.emergentagent.com/api/candidates/80b39272-2f5e-4537-a9a3-9d54d7cf4a6a/download-cv"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#166534;border:solid #E5E5E5 1.0pt;padding:0in;background:#DCFCE7'>&#128196;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#166534;border:solid #E5E5E5 1.0pt;
+  padding:0in;background:#DCFCE7'> Download CV</span></a></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>80b39272-2f5e-4537-a...</span></p>
+  <p class=MsoNormal><a
+  href="https://www.linkedin.com/in/ahmed-alshamy-37668325?utm_source=share&amp;utm_campaign=share_via&amp;utm_content=profile&amp;utm_medium=android_app"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#2563EB;border:solid #E5E5E5 1.0pt;padding:0in'>&#128279;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#2563EB;border:solid #E5E5E5 1.0pt;
+  padding:0in'> Profile Link</span></a></p>
+  </td>
+  <td width=90 nowrap style='width:67.5pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>9/13/2025<br>
+  7:45:12 AM</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=186 nowrap style='width:139.5pt;border:solid #E5E5E5 1.0pt;
+  border-top:none;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Motmen
+  Ali Mohammad Quran</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Jordanian&nbsp;•&nbsp;Male</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>ESL</span></p>
+  </td>
+  <td width=239 nowrap style='width:179.1pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>moataman_qq@yahoo.com</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>0966561448770</span></p>
+  </td>
+  <td width=331 style='width:248.6pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>English</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>BA
+  in English language Literature MA in English to...</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#2563EB'>1&nbsp;certification(s)</span></p>
+  </td>
+  <td width=186 style='width:139.3pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Yes,
+  I have 2+ years post-master's teaching experience</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Tech
+  Skills:&nbsp;5/10 avg</span></p>
+  </td>
+  <td width=168 nowrap style='width:1.75in;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><a
+  href="https://excel-form-data-1.preview.emergentagent.com/api/candidates/b73ed35f-1f00-478a-b679-596aaa074bc9/download-cv"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#166534;border:solid #E5E5E5 1.0pt;padding:0in;background:#DCFCE7'>&#128196;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#166534;border:solid #E5E5E5 1.0pt;
+  padding:0in;background:#DCFCE7'> Download CV</span></a></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>b73ed35f-1f00-478a-b...</span></p>
+  <p class=MsoNormal><a
+  href="https://www.linkedin.com/in/motmen-alquraan-16869554?utm_source=share&amp;utm_campaign=share_via&amp;utm_content=profile&amp;utm_medium=android_app"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#2563EB;border:solid #E5E5E5 1.0pt;padding:0in'>&#128279;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#2563EB;border:solid #E5E5E5 1.0pt;
+  padding:0in'> Profile Link</span></a></p>
+  </td>
+  <td width=90 nowrap style='width:67.5pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>9/13/2025<br>
+  8:36:00 AM</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=186 nowrap style='width:139.5pt;border:solid #E5E5E5 1.0pt;
+  border-top:none;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Hoda
+  Mahmoud Saady</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Egyptian&nbsp;•&nbsp;Female</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>English
+  Instructor</span></p>
+  </td>
+  <td width=239 nowrap style='width:179.1pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>hodamsaady78@yahoo.com</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>00966509205910</span></p>
+  </td>
+  <td width=331 style='width:248.6pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>English
+  Language and Literature</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>BA
+  in English Language and Literature MA in Englis...</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#2563EB'>1&nbsp;certification(s)</span></p>
+  </td>
+  <td width=186 style='width:139.3pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Yes,
+  I have 2+ years post-master's teaching experience</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Tech
+  Skills:&nbsp;10/10 avg</span></p>
+  </td>
+  <td width=168 nowrap style='width:1.75in;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><a
+  href="https://excel-form-data-1.preview.emergentagent.com/api/candidates/286786f0-e65a-4700-82f6-9afe5dc2271c/download-cv"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#166534;border:solid #E5E5E5 1.0pt;padding:0in;background:#DCFCE7'>&#128196;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#166534;border:solid #E5E5E5 1.0pt;
+  padding:0in;background:#DCFCE7'> Download CV</span></a></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>286786f0-e65a-4700-8...</span></p>
+  <p class=MsoNormal><a
+  href="https://www.linkedin.com/in/hoda-saady-497a2a1b6?utm_source=share&amp;utm_campaign=share_via&amp;utm_content=profile&amp;utm_medium=android_app"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#2563EB;border:solid #E5E5E5 1.0pt;padding:0in'>&#128279;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#2563EB;border:solid #E5E5E5 1.0pt;
+  padding:0in'> Profile Link</span></a></p>
+  </td>
+  <td width=90 nowrap style='width:67.5pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>9/13/2025<br>
+  9:21:32 AM</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=186 nowrap style='width:139.5pt;border:solid #E5E5E5 1.0pt;
+  border-top:none;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Muhammad
+  Naseer Iqbal Noor Din</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Pakistani&nbsp;•&nbsp;Male</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>ESL
+  Instructor</span></p>
+  </td>
+  <td width=239 nowrap style='width:179.1pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>naseeriqbal874@gmail.com</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>0538598384</span></p>
+  </td>
+  <td width=331 style='width:248.6pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Master's
+  in English</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Linguistics
+  and Literature</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#2563EB'>1&nbsp;certification(s)</span></p>
+  </td>
+  <td width=186 style='width:139.3pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Yes,
+  I have 2+ years post-master's teaching experience</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Tech
+  Skills:&nbsp;8/10 avg</span></p>
+  </td>
+  <td width=168 nowrap style='width:1.75in;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><a
+  href="https://excel-form-data-1.preview.emergentagent.com/api/candidates/bc8a6244-4b85-4b01-8874-8e016e4dcf60/download-cv"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#166534;border:solid #E5E5E5 1.0pt;padding:0in;background:#DCFCE7'>&#128196;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#166534;border:solid #E5E5E5 1.0pt;
+  padding:0in;background:#DCFCE7'> Download CV</span></a></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>bc8a6244-4b85-4b01-8...</span></p>
+  <p class=MsoNormal><a href="https://www.linkedin.com/in/naseer-iqbal/"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#2563EB;border:solid #E5E5E5 1.0pt;padding:0in'>&#128279;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#2563EB;border:solid #E5E5E5 1.0pt;
+  padding:0in'> Profile Link</span></a></p>
+  </td>
+  <td width=90 nowrap style='width:67.5pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>9/13/2025<br>
+  9:41:39 AM</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=186 nowrap style='width:139.5pt;border:solid #E5E5E5 1.0pt;
+  border-top:none;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Mohammed
+  A Dahab</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Egypt&nbsp;•&nbsp;Male</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>ESL
+  instructor &amp; Curriculum Developer</span></p>
+  </td>
+  <td width=239 nowrap style='width:179.1pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>mahmdroos@gmail.com</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>0558848775</span></p>
+  </td>
+  <td width=331 style='width:248.6pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>TESOL
+  &amp; Applied Linguistics</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Ph.D.
+  candidate - Applied linguistics MA - TESOL</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#2563EB'>3&nbsp;certification(s)</span></p>
+  </td>
+  <td width=186 style='width:139.3pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Yes,
+  I have 2+ years post-master's teaching experience</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Tech
+  Skills:&nbsp;9/10 avg</span></p>
+  </td>
+  <td width=168 nowrap style='width:1.75in;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><a
+  href="https://excel-form-data-1.preview.emergentagent.com/api/candidates/93f0f486-0a55-4e33-aa63-5e531d3649d5/download-cv"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#166534;border:solid #E5E5E5 1.0pt;padding:0in;background:#DCFCE7'>&#128196;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#166534;border:solid #E5E5E5 1.0pt;
+  padding:0in;background:#DCFCE7'> Download CV</span></a></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>93f0f486-0a55-4e33-a...</span></p>
+  <p class=MsoNormal><a
+  href="https://www.linkedin.com/in/mohammed-a-dahab-b1b58258/" target="_blank"><span
+  style='font-family:"Segoe UI Emoji",sans-serif;color:#2563EB;border:solid #E5E5E5 1.0pt;
+  padding:0in'>&#128279;</span><span style='font-family:"Segoe UI",sans-serif;
+  color:#2563EB;border:solid #E5E5E5 1.0pt;padding:0in'> Profile Link</span></a></p>
+  </td>
+  <td width=90 nowrap style='width:67.5pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>9/13/2025<br>
+  9:52:51 AM</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=186 nowrap style='width:139.5pt;border:solid #E5E5E5 1.0pt;
+  border-top:none;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Muhammad
+  Naseer Iqbal Noor Din</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Pakistani&nbsp;•&nbsp;Male</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>ESL
+  Instructor</span></p>
+  </td>
+  <td width=239 nowrap style='width:179.1pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>naseeriqbal874@gmail.com</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>03169297462</span></p>
+  </td>
+  <td width=331 style='width:248.6pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Master's</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Linguistics
+  and Literature</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#2563EB'>1&nbsp;certification(s)</span></p>
+  </td>
+  <td width=186 style='width:139.3pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Yes,
+  I have 2+ years post-master's teaching experience</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Tech
+  Skills:&nbsp;8/10 avg</span></p>
+  </td>
+  <td width=168 nowrap style='width:1.75in;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><a
+  href="https://excel-form-data-1.preview.emergentagent.com/api/candidates/0703ce11-18cc-4ae5-9f07-12a1f93d294b/download-cv"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#166534;border:solid #E5E5E5 1.0pt;padding:0in;background:#DCFCE7'>&#128196;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#166534;border:solid #E5E5E5 1.0pt;
+  padding:0in;background:#DCFCE7'> Download CV</span></a></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>0703ce11-18cc-4ae5-9...</span></p>
+  <p class=MsoNormal><a
+  href="https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#2563EB;border:solid #E5E5E5 1.0pt;padding:0in'>&#128279;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#2563EB;border:solid #E5E5E5 1.0pt;
+  padding:0in'> Profile Link</span></a></p>
+  </td>
+  <td width=90 nowrap style='width:67.5pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>9/13/2025<br>
+  10:33:20 AM</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=186 nowrap style='width:139.5pt;border:solid #E5E5E5 1.0pt;
+  border-top:none;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Bibi
+  Hajira</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Indian&nbsp;•&nbsp;Female</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>English
+  Instructor</span></p>
+  </td>
+  <td width=239 nowrap style='width:179.1pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Hajarhayati886@gmail.com</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>0509268361</span></p>
+  </td>
+  <td width=331 style='width:248.6pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>B.sc
+  .B.ed, M.ed ( English and Science)</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Bachelor
+  of Science (Microbiology) Bachelor of Edu...</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#2563EB'>1&nbsp;certification(s)</span></p>
+  </td>
+  <td width=186 style='width:139.3pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Yes,
+  I have 2+ years post-master's teaching experience</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Tech
+  Skills:&nbsp;10/10 avg</span></p>
+  </td>
+  <td width=168 nowrap style='width:1.75in;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><a
+  href="https://excel-form-data-1.preview.emergentagent.com/api/candidates/b893bd98-d484-4def-afc0-d88d6457aa89/download-cv"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#166534;border:solid #E5E5E5 1.0pt;padding:0in;background:#DCFCE7'>&#128196;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#166534;border:solid #E5E5E5 1.0pt;
+  padding:0in;background:#DCFCE7'> Download CV</span></a></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>b893bd98-d484-4def-a...</span></p>
+  </td>
+  <td width=90 nowrap style='width:67.5pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>9/13/2025<br>
+  10:44:12 AM</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=186 nowrap style='width:139.5pt;border:solid #E5E5E5 1.0pt;
+  border-top:none;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Yasmin
+  Moussa</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Egyptian&nbsp;•&nbsp;Female</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>English
+  instructor</span></p>
+  </td>
+  <td width=239 nowrap style='width:179.1pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>yasminmoussa@hotmail.com</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>+966509061708</span></p>
+  </td>
+  <td width=331 style='width:248.6pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>English
+  literature and arts</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Bachelor's
+  degree in English literature and arts</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#2563EB'>1&nbsp;certification(s)</span></p>
+  </td>
+  <td width=186 style='width:139.3pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Yes,
+  I have 2+ years post-master's teaching experience</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Tech
+  Skills:&nbsp;10/10 avg</span></p>
+  </td>
+  <td width=168 nowrap style='width:1.75in;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><a
+  href="https://excel-form-data-1.preview.emergentagent.com/api/candidates/b27bf483-e65a-4899-b23d-05a5b45da7b6/download-cv"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#166534;border:solid #E5E5E5 1.0pt;padding:0in;background:#DCFCE7'>&#128196;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#166534;border:solid #E5E5E5 1.0pt;
+  padding:0in;background:#DCFCE7'> Download CV</span></a></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>b27bf483-e65a-4899-b...</span></p>
+  </td>
+  <td width=90 nowrap style='width:67.5pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>9/13/2025<br>
+  11:12:56 AM</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=186 nowrap style='width:139.5pt;border:solid #E5E5E5 1.0pt;
+  border-top:none;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Bashir
+  Ibrahim</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Nigerian&nbsp;•&nbsp;Male</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Administrative
+  Assistance</span></p>
+  </td>
+  <td width=239 nowrap style='width:179.1pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>bashiribrahimkn@gmail.com</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>+966569712836</span></p>
+  </td>
+  <td width=331 style='width:248.6pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>English
+  Language Studies/ Ednglish Corpus Linguistics</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Ph.D.
+  in English Language Studies (Corpus Linguist...</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#2563EB'>1&nbsp;certification(s)</span></p>
+  </td>
+  <td width=186 style='width:139.3pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Yes,
+  I have 2+ years post-master's teaching experience</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Tech
+  Skills:&nbsp;10/10 avg</span></p>
+  </td>
+  <td width=168 nowrap style='width:1.75in;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><a
+  href="https://excel-form-data-1.preview.emergentagent.com/api/candidates/2c5d09b2-95ce-4917-8177-1d7a94d4e325/download-cv"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#166534;border:solid #E5E5E5 1.0pt;padding:0in;background:#DCFCE7'>&#128196;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#166534;border:solid #E5E5E5 1.0pt;
+  padding:0in;background:#DCFCE7'> Download CV</span></a></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>2c5d09b2-95ce-4917-8...</span></p>
+  <p class=MsoNormal><a
+  href="https://www.linkedin.com/in/bashir-ibrahim-400254197/" target="_blank"><span
+  style='font-family:"Segoe UI Emoji",sans-serif;color:#2563EB;border:solid #E5E5E5 1.0pt;
+  padding:0in'>&#128279;</span><span style='font-family:"Segoe UI",sans-serif;
+  color:#2563EB;border:solid #E5E5E5 1.0pt;padding:0in'> Profile Link</span></a></p>
+  </td>
+  <td width=90 nowrap style='width:67.5pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>9/13/2025<br>
+  11:51:14 AM</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=186 nowrap style='width:139.5pt;border:solid #E5E5E5 1.0pt;
+  border-top:none;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Abdul
+  Sattar</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Pakistani&nbsp;•&nbsp;Male</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Assistant
+  Professor</span></p>
+  </td>
+  <td width=239 nowrap style='width:179.1pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>sattar1850@gmail.com</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>00966558804012</span></p>
+  </td>
+  <td width=331 style='width:248.6pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Applied
+  Linguistics and TESOL</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>PhD</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#2563EB'>1&nbsp;certification(s)</span></p>
+  </td>
+  <td width=186 style='width:139.3pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Yes,
+  I have 2+ years post-master's teaching experience</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Tech
+  Skills:&nbsp;5/10 avg</span></p>
+  </td>
+  <td width=168 nowrap style='width:1.75in;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><a
+  href="https://excel-form-data-1.preview.emergentagent.com/api/candidates/6eebeb4d-d05d-46d2-9a05-016ccdb9df5a/download-cv"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#166534;border:solid #E5E5E5 1.0pt;padding:0in;background:#DCFCE7'>&#128196;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#166534;border:solid #E5E5E5 1.0pt;
+  padding:0in;background:#DCFCE7'> Download CV</span></a></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>6eebeb4d-d05d-46d2-9...</span></p>
+  <p class=MsoNormal><a
+  href="https://www.linkedin.com/in/dr-abdul-sattar-375bb3376/" target="_blank"><span
+  style='font-family:"Segoe UI Emoji",sans-serif;color:#2563EB;border:solid #E5E5E5 1.0pt;
+  padding:0in'>&#128279;</span><span style='font-family:"Segoe UI",sans-serif;
+  color:#2563EB;border:solid #E5E5E5 1.0pt;padding:0in'> Profile Link</span></a></p>
+  </td>
+  <td width=90 nowrap style='width:67.5pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>9/13/2025<br>
+  2:47:56 PM</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=186 nowrap style='width:139.5pt;border:solid #E5E5E5 1.0pt;
+  border-top:none;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>ELDESOUKY
+  IBRAHIM</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>EGYPTIAN&nbsp;•&nbsp;Male</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>EFL
+  Lecturer</span></p>
+  </td>
+  <td width=239 nowrap style='width:179.1pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>eistnc@gmail.com</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>0551914500</span></p>
+  </td>
+  <td width=331 style='width:248.6pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Applied
+  Linguistics (ELT)</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>BA
+  in English Language and Literature MA in Applie...</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#2563EB'>3&nbsp;certification(s)</span></p>
+  </td>
+  <td width=186 style='width:139.3pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Yes,
+  I have 2+ years post-master's teaching experience</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Tech
+  Skills:&nbsp;10/10 avg</span></p>
+  </td>
+  <td width=168 nowrap style='width:1.75in;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><a
+  href="https://excel-form-data-1.preview.emergentagent.com/api/candidates/4730a3f1-f4a0-46dd-b6ca-c3fd034819b0/download-cv"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#166534;border:solid #E5E5E5 1.0pt;padding:0in;background:#DCFCE7'>&#128196;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#166534;border:solid #E5E5E5 1.0pt;
+  padding:0in;background:#DCFCE7'> Download CV</span></a></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>4730a3f1-f4a0-46dd-b...</span></p>
+  <p class=MsoNormal><a
+  href="https://www.linkedin.com/in/eldesouky-ibrahim-00878571/" target="_blank"><span
+  style='font-family:"Segoe UI Emoji",sans-serif;color:#2563EB;border:solid #E5E5E5 1.0pt;
+  padding:0in'>&#128279;</span><span style='font-family:"Segoe UI",sans-serif;
+  color:#2563EB;border:solid #E5E5E5 1.0pt;padding:0in'> Profile Link</span></a></p>
+  </td>
+  <td width=90 nowrap style='width:67.5pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>9/13/2025<br>
+  6:49:52 PM</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=186 nowrap style='width:139.5pt;border:solid #E5E5E5 1.0pt;
+  border-top:none;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>ELDESOUKY
+  IBRAHIM</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>EGYPTIAN&nbsp;•&nbsp;Male</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>EFL
+  Lecturer</span></p>
+  </td>
+  <td width=239 nowrap style='width:179.1pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>eistnc@gmail.com</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>0551914500</span></p>
+  </td>
+  <td width=331 style='width:248.6pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Applied
+  Linguistics (ELT)</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>BA
+  in English Language and Literature MA in Applie...</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#2563EB'>3&nbsp;certification(s)</span></p>
+  </td>
+  <td width=186 style='width:139.3pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Yes,
+  I have 2+ years post-master's teaching experience</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Tech
+  Skills:&nbsp;10/10 avg</span></p>
+  </td>
+  <td width=168 nowrap style='width:1.75in;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><a
+  href="https://excel-form-data-1.preview.emergentagent.com/api/candidates/ae1e93fc-acf4-404e-b8f4-bd6530f93f0b/download-cv"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#166534;border:solid #E5E5E5 1.0pt;padding:0in;background:#DCFCE7'>&#128196;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#166534;border:solid #E5E5E5 1.0pt;
+  padding:0in;background:#DCFCE7'> Download CV</span></a></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>ae1e93fc-acf4-404e-b...</span></p>
+  <p class=MsoNormal><a
+  href="https://www.linkedin.com/in/eldesouky-ibrahim-00878571/" target="_blank"><span
+  style='font-family:"Segoe UI Emoji",sans-serif;color:#2563EB;border:solid #E5E5E5 1.0pt;
+  padding:0in'>&#128279;</span><span style='font-family:"Segoe UI",sans-serif;
+  color:#2563EB;border:solid #E5E5E5 1.0pt;padding:0in'> Profile Link</span></a></p>
+  </td>
+  <td width=90 nowrap style='width:67.5pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>9/13/2025<br>
+  6:50:43 PM</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=186 nowrap style='width:139.5pt;border:solid #E5E5E5 1.0pt;
+  border-top:none;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Islam
+  Sabir</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Pakistani&nbsp;•&nbsp;Male</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>ENGLISH
+  LANGUAGE INSTRUCTOR</span></p>
+  </td>
+  <td width=239 nowrap style='width:179.1pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>m.islamsabir.pk@gmail.com</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>0567440723</span></p>
+  </td>
+  <td width=331 style='width:248.6pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>English
+  Language</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>M.A
+  B.A FSC(HSSC) Matric(SSC)</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#2563EB'>1&nbsp;certification(s)</span></p>
+  </td>
+  <td width=186 style='width:139.3pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Yes,
+  I have 2+ years post-master's teaching experience</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Tech
+  Skills:&nbsp;5/10 avg</span></p>
+  </td>
+  <td width=168 nowrap style='width:1.75in;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><a
+  href="https://excel-form-data-1.preview.emergentagent.com/api/candidates/072830c8-3416-41c4-ac1c-e9423adf08ed/download-cv"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#166534;border:solid #E5E5E5 1.0pt;padding:0in;background:#DCFCE7'>&#128196;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#166534;border:solid #E5E5E5 1.0pt;
+  padding:0in;background:#DCFCE7'> Download CV</span></a></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>072830c8-3416-41c4-a...</span></p>
+  <p class=MsoNormal><a
+  href="https://www.linkedin.com/in/islam-sabir-b82a961b9/" target="_blank"><span
+  style='font-family:"Segoe UI Emoji",sans-serif;color:#2563EB;border:solid #E5E5E5 1.0pt;
+  padding:0in'>&#128279;</span><span style='font-family:"Segoe UI",sans-serif;
+  color:#2563EB;border:solid #E5E5E5 1.0pt;padding:0in'> Profile Link</span></a></p>
+  </td>
+  <td width=90 nowrap style='width:67.5pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>9/14/2025<br>
+  9:01:19 AM</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=186 nowrap style='width:139.5pt;border:solid #E5E5E5 1.0pt;
+  border-top:none;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Hanan
+  Ahmed Ali AlJarmoozi</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Yemeni&nbsp;•&nbsp;Female</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Assistant
+  Professor</span></p>
+  </td>
+  <td width=239 nowrap style='width:179.1pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>hanan_riyan@yahoo.com</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>0570559594</span></p>
+  </td>
+  <td width=331 style='width:248.6pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>English
+  Language Teaching (ELT)</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Ph.D.
+  in ELT (English Language Teaching ), Departm...</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#2563EB'>1&nbsp;certification(s)</span></p>
+  </td>
+  <td width=186 style='width:139.3pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>No,
+  I do not meet this requirement</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Tech
+  Skills:&nbsp;5/10 avg</span></p>
+  </td>
+  <td width=168 nowrap style='width:1.75in;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><a
+  href="https://excel-form-data-1.preview.emergentagent.com/api/candidates/04d003dc-1f94-458b-a62e-b25c0637b6b2/download-cv"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#166534;border:solid #E5E5E5 1.0pt;padding:0in;background:#DCFCE7'>&#128196;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#166534;border:solid #E5E5E5 1.0pt;
+  padding:0in;background:#DCFCE7'> Download CV</span></a></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>04d003dc-1f94-458b-a...</span></p>
+  <p class=MsoNormal><a
+  href="https://www.linkedin.com/in/dr-hanan-al-jarmoozi-1902b672/?lipi=urn%3Ali%3Apage%3Ad_flagship3_job_home%3BjRu5DRvKSByWkmzTsMTWRw%3D%3D"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#2563EB;border:solid #E5E5E5 1.0pt;padding:0in'>&#128279;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#2563EB;border:solid #E5E5E5 1.0pt;
+  padding:0in'> Profile Link</span></a></p>
+  </td>
+  <td width=90 nowrap style='width:67.5pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>9/14/2025<br>
+  9:36:07 AM</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=186 nowrap style='width:139.5pt;border:solid #E5E5E5 1.0pt;
+  border-top:none;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>NANEES
+  ASGHAR</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Pakistani&nbsp;•&nbsp;Female</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>English
+  Language Instructor</span></p>
+  </td>
+  <td width=239 nowrap style='width:179.1pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>nanees2010@hotmail.com</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>00923078488884</span></p>
+  </td>
+  <td width=331 style='width:248.6pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>English
+  Language and Literature</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Masters</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#2563EB'>2&nbsp;certification(s)</span></p>
+  </td>
+  <td width=186 style='width:139.3pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Yes,
+  I have 2+ years post-master's teaching experience</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Tech
+  Skills:&nbsp;10/10 avg</span></p>
+  </td>
+  <td width=168 nowrap style='width:1.75in;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><a
+  href="https://excel-form-data-1.preview.emergentagent.com/api/candidates/59411611-4a4b-4fbf-b024-a910b6f12d03/download-cv"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#166534;border:solid #E5E5E5 1.0pt;padding:0in;background:#DCFCE7'>&#128196;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#166534;border:solid #E5E5E5 1.0pt;
+  padding:0in;background:#DCFCE7'> Download CV</span></a></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>59411611-4a4b-4fbf-b...</span></p>
+  <p class=MsoNormal><a
+  href="https://www.linkedin.com/in/nanees-asghar-8288aa15/" target="_blank"><span
+  style='font-family:"Segoe UI Emoji",sans-serif;color:#2563EB;border:solid #E5E5E5 1.0pt;
+  padding:0in'>&#128279;</span><span style='font-family:"Segoe UI",sans-serif;
+  color:#2563EB;border:solid #E5E5E5 1.0pt;padding:0in'> Profile Link</span></a></p>
+  </td>
+  <td width=90 nowrap style='width:67.5pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>9/15/2025<br>
+  12:54:46 PM</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=186 nowrap style='width:139.5pt;border:solid #E5E5E5 1.0pt;
+  border-top:none;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Abdulrhim
+  Alrawili</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Saudi&nbsp;•&nbsp;Male</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>ESL
+  teacher</span></p>
+  </td>
+  <td width=239 nowrap style='width:179.1pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>ammr6441@hotmail.com</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>0532626441</span></p>
+  </td>
+  <td width=331 style='width:248.6pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>English
+  language</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Bachelor’s
+  degree in English Language from Norther...</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#2563EB'>2&nbsp;certification(s)</span></p>
+  </td>
+  <td width=186 style='width:139.3pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Yes,
+  I have 2+ years post-master's teaching experience</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Tech
+  Skills:&nbsp;10/10 avg</span></p>
+  </td>
+  <td width=168 nowrap style='width:1.75in;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><a
+  href="https://excel-form-data-1.preview.emergentagent.com/api/candidates/99845169-b8be-4ae4-8d28-cf3ef7af0a38/download-cv"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#166534;border:solid #E5E5E5 1.0pt;padding:0in;background:#DCFCE7'>&#128196;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#166534;border:solid #E5E5E5 1.0pt;
+  padding:0in;background:#DCFCE7'> Download CV</span></a></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>99845169-b8be-4ae4-8...</span></p>
+  </td>
+  <td width=90 nowrap style='width:67.5pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>9/16/2025<br>
+  9:17:36 AM</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=186 nowrap style='width:139.5pt;border:solid #E5E5E5 1.0pt;
+  border-top:none;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>ARWA
+  ABDULLAH H ALRUWAI</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Saudi&nbsp;•&nbsp;Female</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>English
+  teacher</span></p>
+  </td>
+  <td width=239 nowrap style='width:179.1pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>arwa.21002@gmail.com</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>0554608215</span></p>
+  </td>
+  <td width=331 style='width:248.6pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>English
+  language</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Bachelor
+  of English Language Master of Means and T...</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#2563EB'>1&nbsp;certification(s)</span></p>
+  </td>
+  <td width=186 style='width:139.3pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>No,
+  I do not meet this requirement</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Tech
+  Skills:&nbsp;10/10 avg</span></p>
+  </td>
+  <td width=168 nowrap style='width:1.75in;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><a
+  href="https://excel-form-data-1.preview.emergentagent.com/api/candidates/818820d7-9145-4aa0-8445-dec8fa6c5362/download-cv"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#166534;border:solid #E5E5E5 1.0pt;padding:0in;background:#DCFCE7'>&#128196;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#166534;border:solid #E5E5E5 1.0pt;
+  padding:0in;background:#DCFCE7'> Download CV</span></a></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>818820d7-9145-4aa0-8...</span></p>
+  </td>
+  <td width=90 nowrap style='width:67.5pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>9/16/2025<br>
+  9:23:52 AM</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=186 nowrap style='width:139.5pt;border:solid #E5E5E5 1.0pt;
+  border-top:none;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Mohammed
+  Ali Mahjoub Ibrahim</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Sudanese&nbsp;•&nbsp;Male</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>English
+  Language Instructor</span></p>
+  </td>
+  <td width=239 nowrap style='width:179.1pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>abuali972972@gmail.com</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>00966505540713</span></p>
+  </td>
+  <td width=331 style='width:248.6pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Faculty
+  of Education English Language Department</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Bachlor
+  degree of Eglish language. Uiversity of Ge...</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#2563EB'>1&nbsp;certification(s)</span></p>
+  </td>
+  <td width=186 style='width:139.3pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Yes,
+  I have 2+ years post-master's teaching experience</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Tech
+  Skills:&nbsp;5/10 avg</span></p>
+  </td>
+  <td width=168 nowrap style='width:1.75in;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><a
+  href="https://excel-form-data-1.preview.emergentagent.com/api/candidates/b92b41f8-0024-48cc-ac33-0d41f7cbfea7/download-cv"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#166534;border:solid #E5E5E5 1.0pt;padding:0in;background:#DCFCE7'>&#128196;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#166534;border:solid #E5E5E5 1.0pt;
+  padding:0in;background:#DCFCE7'> Download CV</span></a></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>b92b41f8-0024-48cc-a...</span></p>
+  </td>
+  <td width=90 nowrap style='width:67.5pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>9/16/2025<br>
+  11:05:36 AM</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=186 nowrap style='width:139.5pt;border:solid #E5E5E5 1.0pt;
+  border-top:none;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Ahmed
+  Abdul-Aziz Dafa'Allah Abdul-Aziz</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Sudanese&nbsp;•&nbsp;Male</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>English
+  Language Instructor</span></p>
+  </td>
+  <td width=239 nowrap style='width:179.1pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>a.abdulazizd1@gmail.com</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>0540541338</span></p>
+  </td>
+  <td width=331 style='width:248.6pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>English
+  Language</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Master's
+  degree in applied Linguistics. ( Teaching...</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#2563EB'>1&nbsp;certification(s)</span></p>
+  </td>
+  <td width=186 style='width:139.3pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Yes,
+  I have 2+ years post-master's teaching experience</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Tech
+  Skills:&nbsp;5/10 avg</span></p>
+  </td>
+  <td width=168 nowrap style='width:1.75in;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><a
+  href="https://excel-form-data-1.preview.emergentagent.com/api/candidates/2b96780d-1de0-4e04-849b-e4a3da1cb99b/download-cv"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#166534;border:solid #E5E5E5 1.0pt;padding:0in;background:#DCFCE7'>&#128196;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#166534;border:solid #E5E5E5 1.0pt;
+  padding:0in;background:#DCFCE7'> Download CV</span></a></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>2b96780d-1de0-4e04-8...</span></p>
+  </td>
+  <td width=90 nowrap style='width:67.5pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>9/16/2025<br>
+  11:45:17 AM</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=186 nowrap style='width:139.5pt;border:solid #E5E5E5 1.0pt;
+  border-top:none;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Alsadig
+  Ahmed Alsayed</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Sudanese&nbsp;•&nbsp;Male</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>English
+  language teacher</span></p>
+  </td>
+  <td width=239 nowrap style='width:179.1pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>alsadig3183@gmail.com</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>0504162903</span></p>
+  </td>
+  <td width=331 style='width:248.6pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>English
+  language</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Master's
+  degree Bachelor degree</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#2563EB'>1&nbsp;certification(s)</span></p>
+  </td>
+  <td width=186 style='width:139.3pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Yes,
+  I have 2+ years post-master's teaching experience</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Tech
+  Skills:&nbsp;5/10 avg</span></p>
+  </td>
+  <td width=168 nowrap style='width:1.75in;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><a
+  href="https://excel-form-data-1.preview.emergentagent.com/api/candidates/239b72f8-7f63-482c-b869-1cd77617967d/download-cv"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#166534;border:solid #E5E5E5 1.0pt;padding:0in;background:#DCFCE7'>&#128196;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#166534;border:solid #E5E5E5 1.0pt;
+  padding:0in;background:#DCFCE7'> Download CV</span></a></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>239b72f8-7f63-482c-b...</span></p>
+  </td>
+  <td width=90 nowrap style='width:67.5pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>9/16/2025<br>
+  11:51:34 AM</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=186 nowrap style='width:139.5pt;border:solid #E5E5E5 1.0pt;
+  border-top:none;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Khalid
+  Awad Allah Mohamed Ahmed</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Sudanese&nbsp;•&nbsp;Male</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Foreign
+  Language Teacher</span></p>
+  </td>
+  <td width=239 nowrap style='width:179.1pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>khalidawad79@gmail.com</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>0096607413079</span></p>
+  </td>
+  <td width=331 style='width:248.6pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>1-
+  Doctor of philosophy in English language (literature) – university of Gezira
+  - faculty of educational sciences (20/6/2021).</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>1-
+  Doctor of philosophy in English language (liter...</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#2563EB'>1&nbsp;certification(s)</span></p>
+  </td>
+  <td width=186 style='width:139.3pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Yes,
+  I have 2+ years post-master's teaching experience</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Tech
+  Skills:&nbsp;5/10 avg</span></p>
+  </td>
+  <td width=168 nowrap style='width:1.75in;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><a
+  href="https://excel-form-data-1.preview.emergentagent.com/api/candidates/5eaf9d8b-4389-40d2-926a-133c0681cde2/download-cv"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#166534;border:solid #E5E5E5 1.0pt;padding:0in;background:#DCFCE7'>&#128196;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#166534;border:solid #E5E5E5 1.0pt;
+  padding:0in;background:#DCFCE7'> Download CV</span></a></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>5eaf9d8b-4389-40d2-9...</span></p>
+  </td>
+  <td width=90 nowrap style='width:67.5pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>9/16/2025<br>
+  12:41:26 PM</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=186 nowrap style='width:139.5pt;border:solid #E5E5E5 1.0pt;
+  border-top:none;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=AR-SA dir=RTL style='font-family:"Segoe UI",sans-serif;
+  color:#111827'>مصطفى محمد حسن منصور</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Jordanian
+  •&nbsp;Male</span></p>
+  <p class=MsoNormal><span lang=AR-SA dir=RTL style='font-family:"Segoe UI",sans-serif;
+  color:#6B7280'>مدرس لغة انجليزية</span></p>
+  </td>
+  <td width=239 nowrap style='width:179.1pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Mansourmustafa61@yahoo.com</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>0502964080</span></p>
+  </td>
+  <td width=331 style='width:248.6pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=AR-SA dir=RTL style='font-family:"Segoe UI",sans-serif;
+  color:#111827'>ادب ولغه انجليزية</span></p>
+  <p class=MsoNormal><span lang=AR-SA dir=RTL style='font-family:"Segoe UI",sans-serif;
+  color:#6B7280'>دبلوم عالي في اساليب تدريس اللغة الانجليزية بكالور</span><span
+  dir=LTR></span><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'><span
+  dir=LTR></span>...</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#2563EB'>1&nbsp;certification(s)</span></p>
+  </td>
+  <td width=186 style='width:139.3pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Yes,
+  I have 2+ years post-master's teaching experience</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Tech
+  Skills:&nbsp;9/10 avg</span></p>
+  </td>
+  <td width=168 nowrap style='width:1.75in;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><a
+  href="https://excel-form-data-1.preview.emergentagent.com/api/candidates/aa370e76-7627-4292-9060-8f218026aea9/download-cv"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#166534;border:solid #E5E5E5 1.0pt;padding:0in;background:#DCFCE7'>&#128196;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#166534;border:solid #E5E5E5 1.0pt;
+  padding:0in;background:#DCFCE7'> Download CV</span></a></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>aa370e76-7627-4292-9...</span></p>
+  </td>
+  <td width=90 nowrap style='width:67.5pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>9/16/2025<br>
+  5:19:42 PM</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=186 nowrap style='width:139.5pt;border:solid #E5E5E5 1.0pt;
+  border-top:none;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Miad
+  Abdullah Alazmi</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Saudi&nbsp;•&nbsp;Female</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>NA</span></p>
+  </td>
+  <td width=239 nowrap style='width:179.1pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>miaad15@gmail.com</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>0532672968</span></p>
+  </td>
+  <td width=331 style='width:248.6pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>English</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Phd
+  in English literature and criticism Master in...</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#2563EB'>1&nbsp;certification(s)</span></p>
+  </td>
+  <td width=186 style='width:139.3pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Yes,
+  I have 2+ years post-master's teaching experience</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Tech
+  Skills:&nbsp;10/10 avg</span></p>
+  </td>
+  <td width=168 nowrap style='width:1.75in;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><a
+  href="https://excel-form-data-1.preview.emergentagent.com/api/candidates/35fe2aa2-4065-4db7-8eee-d4ffc163587b/download-cv"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#166534;border:solid #E5E5E5 1.0pt;padding:0in;background:#DCFCE7'>&#128196;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#166534;border:solid #E5E5E5 1.0pt;
+  padding:0in;background:#DCFCE7'> Download CV</span></a></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>35fe2aa2-4065-4db7-8...</span></p>
+  <p class=MsoNormal><a href="https://www.linkedin.com/in/miad-abdullah"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#2563EB;border:solid #E5E5E5 1.0pt;padding:0in'>&#128279;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#2563EB;border:solid #E5E5E5 1.0pt;
+  padding:0in'> Profile Link</span></a></p>
+  </td>
+  <td width=90 nowrap style='width:67.5pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>9/17/2025<br>
+  4:25:35 AM</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=186 nowrap style='width:139.5pt;border:solid #E5E5E5 1.0pt;
+  border-top:none;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Muhammad
+  Shahbaz</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Pakistan&nbsp;•&nbsp;Male</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>English
+  Teacher</span></p>
+  </td>
+  <td width=239 nowrap style='width:179.1pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>shahbazhere786@gmail.com</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>0594101269</span></p>
+  </td>
+  <td width=331 style='width:248.6pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>English</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>MS</span></p>
+  </td>
+  <td width=186 style='width:139.3pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Yes,
+  I have 2+ years post-master's teaching experience</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Tech
+  Skills:&nbsp;10/10 avg</span></p>
+  </td>
+  <td width=168 nowrap style='width:1.75in;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><a
+  href="https://excel-form-data-1.preview.emergentagent.com/api/candidates/dccf1a96-6e62-449d-a811-d7aada769895/download-cv"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#166534;border:solid #E5E5E5 1.0pt;padding:0in;background:#DCFCE7'>&#128196;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#166534;border:solid #E5E5E5 1.0pt;
+  padding:0in;background:#DCFCE7'> Download CV</span></a></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>dccf1a96-6e62-449d-a...</span></p>
+  <p class=MsoNormal><a
+  href="https://www.linkedin.com/in/muhammad-shahbaz-39262a25b?utm_source=share&amp;utm_campaign=share_via&amp;utm_content=profile&amp;utm_medium=android_app"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#2563EB;border:solid #E5E5E5 1.0pt;padding:0in'>&#128279;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#2563EB;border:solid #E5E5E5 1.0pt;
+  padding:0in'> Profile Link</span></a></p>
+  </td>
+  <td width=90 nowrap style='width:67.5pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>9/18/2025<br>
+  10:05:51 AM</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=186 nowrap style='width:139.5pt;border:solid #E5E5E5 1.0pt;
+  border-top:none;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Junaid
+  Ahmed</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Indian&nbsp;•&nbsp;Male</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Secondary
+  school teacher</span></p>
+  </td>
+  <td width=239 nowrap style='width:179.1pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>junaidahmed98@gmail.com</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>0548283057</span></p>
+  </td>
+  <td width=331 style='width:248.6pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>M.A.
+  English literature</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>B.A.
+  M.A.</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#2563EB'>1&nbsp;certification(s)</span></p>
+  </td>
+  <td width=186 style='width:139.3pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#111827'>Yes,
+  I have 2+ years post-master's teaching experience</span></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>Tech
+  Skills:&nbsp;9/10 avg</span></p>
+  </td>
+  <td width=168 nowrap style='width:1.75in;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><a
+  href="https://excel-form-data-1.preview.emergentagent.com/api/candidates/7ecf2198-eda2-4bfd-987a-01f31413f2a7/download-cv"
+  target="_blank"><span style='font-family:"Segoe UI Emoji",sans-serif;
+  color:#166534;border:solid #E5E5E5 1.0pt;padding:0in;background:#DCFCE7'>&#128196;</span><span
+  style='font-family:"Segoe UI",sans-serif;color:#166534;border:solid #E5E5E5 1.0pt;
+  padding:0in;background:#DCFCE7'> Download CV</span></a></p>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>7ecf2198-eda2-4bfd-9...</span></p>
+  <p class=MsoNormal><a
+  href="https://www.linkedin.com/in/junaid-ahmed-7833981a/" target="_blank"><span
+  style='font-family:"Segoe UI Emoji",sans-serif;color:#2563EB;border:solid #E5E5E5 1.0pt;
+  padding:0in'>&#128279;</span><span style='font-family:"Segoe UI",sans-serif;
+  color:#2563EB;border:solid #E5E5E5 1.0pt;padding:0in'> Profile Link</span></a></p>
+  </td>
+  <td width=90 nowrap style='width:67.5pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-family:"Segoe UI",sans-serif;color:#6B7280'>9/18/2025<br>
+  1</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=186 nowrap style='width:139.5pt;border:solid #E5E5E5 1.0pt;
+  border-top:none;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;
+  color:#111827'>Maryam</span></p>
+  <p class=MsoNormal><span style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;
+  color:#6B7280'>Sudanese&nbsp;•&nbsp;Female</span></p>
+  <p class=MsoNormal><span style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;
+  color:#6B7280'>English teacher</span></p>
+  </td>
+  <td width=239 nowrap style='width:179.1pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;
+  color:#111827'>bntomran111@gmail.com</span></p>
+  <p class=MsoNormal><span style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;
+  color:#6B7280'>966558812029</span></p>
+  </td>
+  <td width=331 style='width:248.6pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;
+  color:#111827'>Master of education</span></p>
+  <p class=MsoNormal><span style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;
+  color:#6B7280'>Master degree of Education</span></p>
+  <p class=MsoNormal><span style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;
+  color:#2563EB'>1&nbsp;certification(s)</span></p>
+  </td>
+  <td width=186 style='width:139.3pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;
+  color:#111827'>Yes, I have 2+ years post-master's teaching experience</span></p>
+  <p class=MsoNormal><span style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;
+  color:#6B7280'>Tech Skills:&nbsp;5/10 avg</span></p>
+  </td>
+  <td width=168 nowrap style='width:1.75in;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><a
+  href="https://excel-form-data-1.preview.emergentagent.com/api/candidates/22ad3b0c-a1d7-4d9d-bff5-7f81d18639eb/download-cv"
+  target="_blank"><span style='font-size:13.5pt;font-family:"Segoe UI Emoji",sans-serif;
+  color:#166534;border:solid #E5E5E5 1.0pt;padding:0in;background:#DCFCE7'>&#128196;</span><span
+  style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;color:#166534;
+  border:solid #E5E5E5 1.0pt;padding:0in;background:#DCFCE7'> Download CV</span></a></p>
+  <p class=MsoNormal><span style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;
+  color:#6B7280'>22ad3b0c-a1d7-4d9d-b...</span></p>
+  </td>
+  <td width=90 nowrap style='width:67.5pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;
+  color:#6B7280'>9/18/2025<br>
+  5:55:17 PM</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=186 nowrap style='width:139.5pt;border:solid #E5E5E5 1.0pt;
+  border-top:none;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;
+  color:#111827'>Khaldoon Khmaisa</span></p>
+  <p class=MsoNormal><span style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;
+  color:#6B7280'>Jordanian&nbsp;•&nbsp;Male</span></p>
+  <p class=MsoNormal><span style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;
+  color:#6B7280'>LECTURER</span></p>
+  </td>
+  <td width=239 nowrap style='width:179.1pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;
+  color:#111827'>hkhamaisa@yahoo.com</span></p>
+  <p class=MsoNormal><span style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;
+  color:#6B7280'>0554653953</span></p>
+  </td>
+  <td width=331 style='width:248.6pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;
+  color:#111827'>MA of English Language and I am as PhD student In UnisZA
+  University</span></p>
+  <p class=MsoNormal><span style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;
+  color:#6B7280'>Lec</span></p>
+  <p class=MsoNormal><span style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;
+  color:#2563EB'>1&nbsp;certification(s)</span></p>
+  </td>
+  <td width=186 style='width:139.3pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;
+  color:#111827'>Yes, I have 2+ years post-master's teaching experience</span></p>
+  <p class=MsoNormal><span style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;
+  color:#6B7280'>Tech Skills:&nbsp;10/10 avg</span></p>
+  </td>
+  <td width=168 nowrap style='width:1.75in;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><a
+  href="https://excel-form-data-1.preview.emergentagent.com/api/candidates/d159d015-431b-4fd4-9d41-d4d7444a8e2e/download-cv"
+  target="_blank"><span style='font-size:13.5pt;font-family:"Segoe UI Emoji",sans-serif;
+  color:#166534;border:solid #E5E5E5 1.0pt;padding:0in;background:#DCFCE7'>&#128196;</span><span
+  style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;color:#166534;
+  border:solid #E5E5E5 1.0pt;padding:0in;background:#DCFCE7'> Download CV</span></a></p>
+  <p class=MsoNormal><span style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;
+  color:#6B7280'>d159d015-431b-4fd4-9...</span></p>
+  <p class=MsoNormal><a href="https://www.linkedin.com/in/layth-khamaiseh"
+  target="_blank"><span style='font-size:13.5pt;font-family:"Segoe UI Emoji",sans-serif;
+  color:#2563EB;border:solid #E5E5E5 1.0pt;padding:0in'>&#128279;</span><span
+  style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;color:#2563EB;
+  border:solid #E5E5E5 1.0pt;padding:0in'> Profile Link</span></a></p>
+  </td>
+  <td width=90 nowrap style='width:67.5pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;
+  color:#6B7280'>9/20/2025</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=186 nowrap style='width:139.5pt;border:solid #E5E5E5 1.0pt;
+  border-top:none;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;
+  color:#111827'>Asaad Mohammed Ahmed Ahmed</span></p>
+  <p class=MsoNormal><span style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;
+  color:#6B7280'>Sudanese&nbsp;•&nbsp;Male</span></p>
+  <p class=MsoNormal><span style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;
+  color:#6B7280'>Lecturer</span></p>
+  </td>
+  <td width=239 nowrap style='width:179.1pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;
+  color:#111827'>asaadamed1960@gmail.com</span></p>
+  <p class=MsoNormal><span style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;
+  color:#6B7280'>+966568538478</span></p>
+  </td>
+  <td width=331 style='width:248.6pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;
+  color:#111827'>English Language/ Linguistics</span></p>
+  <p class=MsoNormal><span style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;
+  color:#6B7280'>Master's degree</span></p>
+  <p class=MsoNormal><span style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;
+  color:#2563EB'>2&nbsp;certification(s)</span></p>
+  </td>
+  <td width=186 style='width:139.3pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;
+  color:#111827'>Yes, I have 2+ years post-master's teaching experience</span></p>
+  <p class=MsoNormal><span style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;
+  color:#6B7280'>Tech Skills:&nbsp;5/10 avg</span></p>
+  </td>
+  <td width=168 nowrap style='width:1.75in;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><a
+  href="https://excel-form-data-1.preview.emergentagent.com/api/candidates/bd5a3c9e-06ad-493c-a8d5-c68c63dcce1b/download-cv"
+  target="_blank"><span style='font-size:13.5pt;font-family:"Segoe UI Emoji",sans-serif;
+  color:#166534;border:solid #E5E5E5 1.0pt;padding:0in;background:#DCFCE7'>&#128196;</span><span
+  style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;color:#166534;
+  border:solid #E5E5E5 1.0pt;padding:0in;background:#DCFCE7'> Download CV</span></a></p>
+  <p class=MsoNormal><span style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;
+  color:#6B7280'>bd5a3c9e-06ad-493c-a...</span></p>
+  </td>
+  <td width=90 nowrap style='width:67.5pt;border-top:none;border-left:none;
+  border-bottom:solid #E5E5E5 1.0pt;border-right:solid #E5E5E5 1.0pt;
+  padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span style='font-size:13.5pt;font-family:"Segoe UI",sans-serif;
+  color:#6B7280'>9/20/2025<br>
+  4:07:04 PM</span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+</div>
+
 </body>
+
 </html>
